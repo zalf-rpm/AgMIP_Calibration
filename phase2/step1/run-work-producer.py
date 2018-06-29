@@ -55,7 +55,7 @@ def run_producer():
         "server": "localhost"
     }
 
-    training_mode = True
+    training_mode = False
     output_dir = "runs/2018-06-29/"
     output_filename = "agmip_calibration_phase2_step1_evaluation.csv"
     if training_mode:
@@ -86,8 +86,8 @@ def run_producer():
         sim_id = int(simulation_row["n"])
 
         # just for testing only run one simulation
-        if sim_id>12:
-            continue
+        # if sim_id>12:
+        #    continue
 
         if training_mode:
             # calibration mode
@@ -95,14 +95,22 @@ def run_producer():
             if simulation_row["Date_observee_Epi_1cm"] == "NA":
                 print("Skip evaluation simulation because testing mode is active")
                 continue
-            else:
-                print("Run training simulation " + str(sim_id))
+
+        print("Run simulation " + str(sim_id))
 
         site_parameters = create_site_parameters(simulation_row)
         crop_parameters = create_crop_parameters(simulation_row)
-        sim_parameters = create_sim_parameters(simulation_row, paths["INCLUDE_FILE_BASE_PATH"])
+        sim_parameters = create_sim_parameters(simulation_row, paths["INCLUDE_FILE_BASE_PATH"], sim_id)
 
+        #
+        with open("monica_simulation_setup/site-" + str(sim_id) + ".json", "w") as fp:
+            json.dump(site_parameters, fp=fp, indent=4)
 
+        with open("monica_simulation_setup/crop-" + str(sim_id) + ".json", "w") as fp:
+            json.dump(crop_parameters, fp=fp, indent=4)
+
+        with open("monica_simulation_setup/sim-" + str(sim_id) + ".json", "w") as fp:
+            json.dump(sim_parameters, fp=fp, indent=4)
 
         env_map = {
             "crop": crop_parameters,
@@ -124,10 +132,10 @@ def run_producer():
             "bbch30": bbch30,
             "bbch55": bbch55
         }
-        print("ENV", env)
-        fp = open("runs/env.json", "w")
-        json.dump(env, fp=fp,  indent=4)
-        fp.close()
+
+        #fp = open("runs/env.json", "w")
+        #json.dump(env, fp=fp,  indent=4)
+        #fp.close()
 
         socket.send_json(env)
         print("sent env ", sent_id, " customId: ", env["customId"])
@@ -174,13 +182,16 @@ def get_monica_date_string(date):
 
     """ Converts a date string provide by the AgMIP Mgt File into a MONICA date string (isoformat). """
 
+    if date == "NA":
+        return "NA"
+
     new_date = datetime.datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d")
     return new_date
 
 ########################################################
 
 
-def create_sim_parameters(mgt_row, include_path):
+def create_sim_parameters(mgt_row, include_path, sim_id):
 
     """ Creates simulation object based on information provided by the Agmip files. """
 
@@ -192,6 +203,8 @@ def create_sim_parameters(mgt_row, include_path):
     sim_parameters["end-date"] = str(harvest_year) + "-12-31"
     sim_parameters["use-leap-years"] = True
 
+    sim_parameters["crop.json"] = "crop-" + str(sim_id) + ".json"
+    sim_parameters["site.json"] = "site-" + str(sim_id) + ".json"
     sim_parameters["debug?"] = True
 
     output_map = {
@@ -313,9 +326,6 @@ def create_crop_parameters(mgt_row):
         "harvest-time": "maturity"
     }
     workstep_list.append(harvest_step)
-
-    for step in workstep_list:
-        print(step)
 
     crop_parameters = {
         "crops" : {
