@@ -1,0 +1,526 @@
+Return-Path: <sabine.seidel@uni-bonn.de>
+Received: from email.zalf.de ([unix socket])
+	 by email (Cyrus v2.4.16-Debian-2.4.16-4+deb7u2) with LMTPA;
+	 Thu, 24 May 2018 14:03:29 +0200
+X-Sieve: CMU Sieve 2.4
+Received: from email.zalf.de (reddoxx.zalf.de [10.10.10.55])
+	by email.zalf.de (Postfix) with ESMTP id 367F8CCFB8;
+	Thu, 24 May 2018 14:03:29 +0200 (CEST)
+Received: from mfilter-133-1-2.mx.srv.dfn.de ( [194.95.234.71]) by email.zalf.de
+	(Reddoxx engine) with SMTP id 4A4E24427E9; Thu, 24 May 2018 14:02:59 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mfilter-133-1-2.mx.srv.dfn.de (Postfix) with ESMTP id 6685D80037;
+	Thu, 24 May 2018 14:03:27 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mgw1-tub.srv.dfn.de
+Authentication-Results: mgw1-tub.srv.dfn.de (amavisd-new);
+	dkim=pass (1024-bit key) header.d=uni-bonn.de header.b=SWDdcH3C;
+	dkim=pass (1024-bit key) header.d=uni-bonn.de header.b=SWDdcH3C
+Received: from mfilter-133-1-2.mx.srv.dfn.de ([127.0.0.1])
+	by localhost (mgw1-tub.srv.dfn.de [127.0.0.1]) (amavisd-new, port 20037)
+	with ESMTP id sUwWSswv4Lxi; Thu, 24 May 2018 14:03:26 +0200 (CEST)
+Received: from mail.uni-bonn.de (mail.uni-bonn.de [131.220.15.112])
+	by mfilter-133-1-2.mx.srv.dfn.de (Postfix) with ESMTPS id E305A80036;
+	Thu, 24 May 2018 14:03:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uni-bonn.de; s=mail;
+	bh=pMM8Z2QHIqLT/v9hGOv/wttPl/PkmeOF5xzBqr6Yle0=;
+	h=Content-Language:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From
+	:References:Cc:To:Subject; b=SWDdcH3CbAkVLR5AIkyYLnbYtUaaj/G+7tdVvGMTrGsbnkVF
+	Zu+z8g5UoR/EikEbWEMYVFtvHD9HE4AksQV0m8nE8l9MYrIZ1LdnihmZACg5mIWRc5TCWVlN3WU93
+	+tmuuKyaISAEIG6m6wO/2cytZH7Fc5UnVHxqZ5PmUGnZfI=
+Received: from [131.220.15.113] (HELO uni-bonn.de)
+  by uni-bonn.de (CommuniGate Pro SMTP 6.2.4)
+  with ESMTP id 96314620; Thu, 24 May 2018 14:03:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uni-bonn.de; s=mail;
+	bh=pMM8Z2QHIqLT/v9hGOv/wttPl/PkmeOF5xzBqr6Yle0=;
+	h=Content-Language:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From
+	:References:Cc:To:Subject; b=SWDdcH3CbAkVLR5AIkyYLnbYtUaaj/G+7tdVvGMTrGsbnkVF
+	Zu+z8g5UoR/EikEbWEMYVFtvHD9HE4AksQV0m8nE8l9MYrIZ1LdnihmZACg5mIWRc5TCWVlN3WU93
+	+tmuuKyaISAEIG6m6wO/2cytZH7Fc5UnVHxqZ5PmUGnZfI=
+Received: from [131.220.117.141] (account sseidel1@uni-bonn.de [131.220.117.141] verified)
+  by uni-bonn.de (CommuniGate Pro SMTP 6.2.4)
+  with ESMTPSA id 135698420; Thu, 24 May 2018 14:03:25 +0200
+Subject: Re: Calibration study
+To: Claas Nendel <nendel@zalf.de>,
+ "Daniel Wallach (daniel.wallach@inra.fr)" <daniel.wallach@inra.fr>,
+ taru.palosuo@luke.fi
+Cc: specka@zalf.de
+References: <433332834.10540.1527162436648@localhost>
+From: Sabine Seidel <sabine.seidel@uni-bonn.de>
+Message-ID: <6789a88d-d193-b492-cbb1-7c591086fcc0@uni-bonn.de>
+Date: Thu, 24 May 2018 14:03:51 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.8.0
+MIME-Version: 1.0
+In-Reply-To: <433332834.10540.1527162436648@localhost>
+Content-Type: multipart/alternative;
+ boundary="------------7EB821861E9A17A01086F460"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------7EB821861E9A17A01086F460
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+Dear Claas, dear Xenia,
+we are pleased to welcome you on board of our calibration activity!
+Please find further information and the link to the data set below.
+Best greetings from Bonn, Sabine
+
+
+Dear participants in phase 2=C2=A0 of the AgMIP calibration activity.
+
+In step 1 of this phase, you are asked to calibrate the phenology part=20
+of your model, based on data for winter wheat, using your usual approach=20
+to calibration. There are two varieties, so two calibrations to do. The=20
+six=C2=A0 files include detailed instructions, two files with the data (o=
+ne=20
+is for weather, the other for soil, management and observed phenology=20
+information), a file with a detailed explanation of what's in the data=20
+files, and two templates for the information that you will=20
+return.*Please find the files here: **link=20
+<https://uni-bonn.sciebo.de/s/Jc3naMA2VfF3p1J/download>**
+***
+We ask that you furnish the results *before June 10*. If that poses a=20
+problem, please let us know.
+
+We are planning to identify the individual models when publishing the=20
+results. If that is a problem, again let us know.
+
+We are planning to repeat this activity with a second data set for=20
+spring wheat phenology, which has quite a different structure. It will=20
+be sent out as soon as we finish testing it with one model, to eliminate=20
+as far as possible problems. We imagine that this second data set could=20
+provide a separate publication, either supporting or modifying somewhat=20
+the results from this first study.
+
+Finally, please do not publish anything related to these data until=20
+getting explicit permission from the co-leaders of this activity. This=20
+is to ensure that the first publication(s) involve the full team of=20
+participants.
+
+If you have any questions or concerns, please send them to the four=20
+co-leaders.
+
+Sincerely,
+Daniel, Taru, Sabine and Peter
+
+
+
+
+
+Am 24/05/2018 um 13:47 schrieb Claas Nendel:
+>
+> Dear all,
+>
+> Xenia Specka and I would love to participate in the calibration study,=20
+> if it is not too late. If you agree, could you please add us to the=20
+> list and provide us with the protocol? We participate with MONICA (in=20
+> case there were doubts J).
+>
+> Best wishes
+>
+> Claas
+>
+> _______________________________________________
+>
+> *Dr. Claas Nendel*
+>
+> Komm. Co-Leiter//Acting Co-Head/
+>
+> Forschungsplattform =E2=80=9EModelle & Simulation=E2=80=9C
+>
+> Leibniz-Zentrum f=C3=BCr Agrarlandschaftsforschung (ZALF) e.V.
+>
+> /Research Platform =E2=80=9EModels & Simulation=E2=80=9C/
+>
+> /Leibniz Centre for Agricultural Landscape Research (ZALF)/
+>
+> Eberswalder Stra=C3=9Fe 84
+>
+> 15374 M=C3=BCncheberg (Germany)
+>
+> T: +49 33432 82 355
+>
+> F: +49 33432 82 334
+>
+> E: nendel@zalf.de <mailto:nendel@zalf.de>
+>
+> I: www.zalf.de <http://www.zalf.de/>
+>
+> I: www.researchgate.net/profile/Claas_Nendel/=20
+> <http://www.researchgate.net/profile/Claas_Nendel/>
+>
+> ________________________________________________
+>
+> Wissenschaftlicher Direktor (Scientific Director): Prof. Dr. Frank Ewer=
+t
+>
+> Verwaltungsdirektorin (Administrative Director): Cornelia Rosenberg
+>
+> Court at which the institute is registered: Amtsgericht Frankfurt/Oder
+>
+> Register Number: VR 3535
+>
+> VAT-ID: DE811417184
+>
+> ________________________________________________
+>
+> *Besuchen Sie uns:*
+>
+> ZALF @ Lange Nacht der Wissenschaften am 9. Juni 2018
+>
+> Haus der Leibniz-Gemeinschaft, Chausseestra=C3=9Fe 111, Berlin
+>
+> ZALF @ Langer Tag der StadtNatur am 17. Juni 2018
+>
+> Prinzessinneng=C3=A4rten am Moritzplatz, Prinzenstra=C3=9Fe 35 =E2=80=93=
+ 38, Berlin
+>
+> __________________________________________________________
+>
+> Agrarlandschaftsforschung quer/FELD/ein
+>
+> im neuen ZALF-Magazin: www.leibniz-zalf.de/FELD=20
+> <http://www.leibniz-zalf.de/FELD>
+>
+> __________________________________________________________
+>
+
+--=20
+Dr. Sabine Seidel
+member of academic staff
+University of Bonn
+Institute of Crop Science and Resource Conservation (INRES)
+Crop Science Group, room 2.013
+Katzenburgweg 5, 53115 Bonn, Germany
+Phone: +49 (0)228 732876
+E-Mail: sabine.seidel@uni-bonn.de
+http://www.lap.uni-bonn.de/ https://www.soil3.de/
+and  http://www.sabine-seidel.de/
+
+
+--------------7EB821861E9A17A01086F460
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+  </head>
+  <body text=3D"#000000" bgcolor=3D"#FFFFFF">
+    Dear Claas, dear Xenia,<br>
+    we are pleased to welcome you on board of our calibration activity!<b=
+r>
+    Please find further information and the link to the data set below.<b=
+r>
+    Best greetings from Bonn, Sabine<br>
+    <br>
+    <br>
+    Dear participants in phase 2=C2=A0 of the AgMIP calibration activity.
+    <br>
+    <br>
+    In step 1 of this phase, you are asked to calibrate the phenology
+    part of your model, based on data for winter wheat, using your usual
+    approach to calibration. There are two varieties, so two
+    calibrations to do. The six=C2=A0 files include detailed instructions=
+,
+    two files with the data (one is for weather, the other for soil,
+    management and observed phenology information), a file with a
+    detailed explanation of what's in the data files, and two templates
+    for the information that you will return.<b> Please find the files
+      here: </b><b><a
+        href=3D"https://uni-bonn.sciebo.de/s/Jc3naMA2VfF3p1J/download">li=
+nk</a></b><b><br>
+    </b><b>
+    </b><br>
+    We ask that you furnish the results <b>before June 10</b>. If that
+    poses a problem, please let us know.
+    <br>
+    <br>
+    We are planning to identify the individual models when publishing
+    the results. If that is a problem, again let us know.
+    <br>
+    <br>
+    We are planning to repeat this activity with a second data set for
+    spring wheat phenology, which has quite a different structure. It
+    will be sent out as soon as we finish testing it with one model, to
+    eliminate as far as possible problems. We imagine that this second
+    data set could provide a separate publication, either supporting or
+    modifying somewhat the results from this first study.
+    <br>
+    <br>
+    Finally, please do not publish anything related to these data until
+    getting explicit permission from the co-leaders of this activity.
+    This is to ensure that the first publication(s) involve the full
+    team of participants.
+    <br>
+    <br>
+    If you have any questions or concerns, please send them to the four
+    co-leaders. <br>
+    <br>
+    Sincerely, <br>
+    Daniel, Taru, Sabine and Peter <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class=3D"moz-cite-prefix">Am 24/05/2018 um 13:47 schrieb Claas
+      Nendel:<br>
+    </div>
+    <blockquote type=3D"cite"
+      cite=3D"mid:433332834.10540.1527162436648@localhost">
+      <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Du=
+tf-8">
+      <meta name=3D"Generator" content=3D"Microsoft Word 14 (filtered
+        medium)">
+      <style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:"Segoe UI Semibold";
+	panose-1:2 11 7 2 4 2 4 2 2 3;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.E-MailFormatvorlage17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+      <div class=3D"WordSection1">
+        <p class=3D"MsoNormal">Dear all,<o:p></o:p></p>
+        <p class=3D"MsoNormal"><o:p>=C2=A0</o:p></p>
+        <p class=3D"MsoNormal"><span lang=3D"EN-US">Xenia Specka and I wo=
+uld
+            love to participate in the calibration study, if it is not
+            too late. If you agree, could you please add us to the list
+            and provide us with the protocol? We participate with MONICA
+            (in case there were doubts </span><span
+            style=3D"font-family:Wingdings" lang=3D"EN-US">J</span><span
+            lang=3D"EN-US">).<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>=C2=A0</o:p></sp=
+an></p>
+        <p class=3D"MsoNormal"><span lang=3D"EN-US">Best wishes<o:p></o:p=
+></span></p>
+        <p class=3D"MsoNormal"><span lang=3D"EN-US">Claas<o:p></o:p></spa=
+n></p>
+        <p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>=C2=A0</o:p></sp=
+an></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"EN-=
+US">_______________________________________________<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><b><span
+              style=3D"font-size:9.0pt;mso-fareast-language:DE"
+              lang=3D"EN-US">Dr. Claas Nendel<o:p></o:p></span></b></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"EN-=
+US">Komm.
+            Co-Leiter/<i>Acting Co-Head</i><o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Forschungsp=
+lattform
+            =E2=80=9EModelle &amp; Simulation=E2=80=9C<o:p></o:p></span><=
+/p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Leibniz-Zen=
+trum
+            f=C3=BCr Agrarlandschaftsforschung (ZALF) e.V. <o:p></o:p></s=
+pan></p>
+        <p class=3D"MsoNormal"><i><span
+              style=3D"font-size:9.0pt;mso-fareast-language:DE"
+              lang=3D"EN-US">Research Platform =E2=80=9EModels &amp; Simu=
+lation=E2=80=9C<o:p></o:p></span></i></p>
+        <p class=3D"MsoNormal"><i><span
+              style=3D"font-size:9.0pt;mso-fareast-language:DE"
+              lang=3D"EN-US">Leibniz Centre for Agricultural Landscape
+              Research (ZALF)<o:p></o:p></span></i></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Eberswalder
+            Stra=C3=9Fe 84<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">15374
+            M=C3=BCncheberg (Germany)<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">T: +49 3343=
+2
+            82 355<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">F: +49 3343=
+2
+            82 334<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">E: <a
+              href=3D"mailto:nendel@zalf.de" moz-do-not-send=3D"true"><sp=
+an
+                style=3D"color:blue">nendel@zalf.de</span></a><o:p></o:p>=
+</span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"DA"=
+>I:
+          </span><span style=3D"font-size:9.0pt;mso-fareast-language:DE">=
+<a
+              href=3D"http://www.zalf.de/" moz-do-not-send=3D"true"><span
+                style=3D"color:blue" lang=3D"DA">www.zalf.de</span></a></=
+span><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"DA"=
+><o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"DA"=
+>I:
+          </span><span style=3D"font-size:9.0pt;mso-fareast-language:DE">=
+<a
+              href=3D"http://www.researchgate.net/profile/Claas_Nendel/"
+              moz-do-not-send=3D"true"><span style=3D"color:blue" lang=3D=
+"DA">www.researchgate.net/profile/Claas_Nendel/</span></a></span><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE" lang=3D"DA"=
+><o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">___________=
+_____________________________________<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span style=3D"mso-fareast-language:DE"><o=
+:p>=C2=A0</o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Wissenschaf=
+tlicher
+            Direktor (Scientific Director): Prof. Dr. Frank Ewert <o:p></=
+o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Verwaltungs=
+direktorin
+            (Administrative Director): Cornelia Rosenberg <o:p></o:p></sp=
+an></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Court at
+            which the institute is registered: Amtsgericht
+            Frankfurt/Oder<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">Register
+            Number: VR 3535<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE">VAT-ID:
+            DE811417184<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span style=3D"font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">____=
+____________________________________________<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><b><span
+              style=3D"font-size:9.0pt;font-family:&quot;Segoe UI
+              Semibold&quot;,&quot;sans-serif&quot;;mso-fareast-language:=
+DE">Besuchen
+              Sie uns:<o:p></o:p></span></b></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe UI
+            Semibold&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE=
+">ZALF
+            @ Lange Nacht der Wissenschaften am 9. Juni 2018<o:p></o:p></=
+span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">Haus
+            der Leibniz-Gemeinschaft, Chausseestra=C3=9Fe 111, Berlin<o:p=
+></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe UI
+            Semibold&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE=
+">ZALF
+            @ Langer Tag der StadtNatur am 17. Juni 2018<o:p></o:p></span=
+></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">Prin=
+zessinneng=C3=A4rten
+            am Moritzplatz, Prinzenstra=C3=9Fe 35 =E2=80=93 38, Berlin<o:=
+p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">____=
+______________________________________________________<o:p></o:p></span><=
+/p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">Agra=
+rlandschaftsforschung
+            quer<i>FELD</i>ein <o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">im
+            neuen ZALF-Magazin<span style=3D"color:#1F497D">: </span></sp=
+an><span
+            style=3D"font-size:9.0pt;mso-fareast-language:DE"><a
+              href=3D"http://www.leibniz-zalf.de/FELD"
+              moz-do-not-send=3D"true"><span
+                style=3D"font-family:&quot;Segoe
+                UI&quot;,&quot;sans-serif&quot;;color:blue">www.leibniz-z=
+alf.de/FELD</span></a></span><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;color:#1F497D;mso-fareast-lan=
+guage:DE">
+          </span><span style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE">=C2=A0=
+<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><span
+            style=3D"font-size:9.0pt;font-family:&quot;Segoe
+            UI&quot;,&quot;sans-serif&quot;;mso-fareast-language:DE"
+            lang=3D"EN-GB">______________________________________________=
+____________<o:p></o:p></span></p>
+        <p class=3D"MsoNormal"><o:p>=C2=A0</o:p></p>
+      </div>
+    </blockquote>
+    <br>
+    <pre class=3D"moz-signature" cols=3D"72">--=20
+Dr. Sabine Seidel
+member of academic staff=20
+University of Bonn
+Institute of Crop Science and Resource Conservation (INRES)
+Crop Science Group, room 2.013
+Katzenburgweg 5, 53115 Bonn, Germany
+Phone: +49 (0)228 732876
+E-Mail: <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:sabine.seide=
+l@uni-bonn.de">sabine.seidel@uni-bonn.de</a>    =20
+<a class=3D"moz-txt-link-freetext" href=3D"http://www.lap.uni-bonn.de/">h=
+ttp://www.lap.uni-bonn.de/</a> <a class=3D"moz-txt-link-freetext" href=3D=
+"https://www.soil3.de/">https://www.soil3.de/</a> =20
+and  <a class=3D"moz-txt-link-freetext" href=3D"http://www.sabine-seidel.=
+de/">http://www.sabine-seidel.de/</a></pre>
+  </body>
+</html>
+
+--------------7EB821861E9A17A01086F460--
