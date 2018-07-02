@@ -1,0 +1,71 @@
+{
+    "SoilTemperatureParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-temperature.json"
+    ], 
+    "SoilOrganicParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-organic.json"
+    ], 
+    "EnvironmentParameters": {
+        "LeachingDepth": 2.0, 
+        "AtmosphericCO2": 395, 
+        "=": [
+            "include-from-file", 
+            "monica_simulation_setup/monica_parameters/general/environment.json"
+        ], 
+        "WindSpeedHeight": 2.5
+    }, 
+    "SoilMoistureParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-moisture.json"
+    ], 
+    "SiteParameters": {
+        "Latitude": 47.904167, 
+        "Slope": 0.01, 
+        "SoilProfileParameters": [
+            {
+                "Sand": 0.091, 
+                "FieldCapacity": 0.244, 
+                "SoilMoisturePercentFC": 0, 
+                "Clay": 0.309, 
+                "PermanentWiltingPoint": 0.142, 
+                "pH": 7.5, 
+                "SoilBulkDensity": 1382.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicMatter": 0.019, 
+                "Thickness": [
+                    25.0, 
+                    "cm"
+                ]
+            }, 
+            {
+                "Sand": 0.081, 
+                "FieldCapacity": 0.236, 
+                "SoilMoisturePercentFC": 66.1, 
+                "Clay": 0.36, 
+                "PermanentWiltingPoint": 0.156, 
+                "pH": 7.5, 
+                "SoilBulkDensity": 1569.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicMatter": 0.009000000000000001, 
+                "Thickness": [
+                    65.0, 
+                    "cm"
+                ]
+            }
+        ], 
+        "NDeposition": [
+            30, 
+            "kg N ha-1 y-1"
+        ], 
+        "HeightNN": [
+            129.0, 
+            "m"
+        ]
+    }, 
+    "SoilTransportParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-transport.json"
+    ]
+}

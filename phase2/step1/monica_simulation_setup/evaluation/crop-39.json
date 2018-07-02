@@ -1,0 +1,119 @@
+{
+    "crops": {
+        "WW": {
+            "is-winter-crop": true, 
+            "residueParams": [
+                "include-from-file", 
+                "monica_simulation_setup/monica_parameters/crop-residues/wheat.json"
+            ], 
+            "cropParams": {
+                "cultivar": [
+                    "include-from-file", 
+                    "monica_simulation_setup/monica_parameters/crops/wheat/winter-wheat-apache.json"
+                ], 
+                "species": [
+                    "include-from-file", 
+                    "monica_simulation_setup/monica_parameters/crops/wheat.json"
+                ]
+            }
+        }
+    }, 
+    "cropRotation": [
+        {
+            "worksteps": [
+                {
+                    "date": "2010-10-22", 
+                    "type": "Sowing", 
+                    "crop": [
+                        "ref", 
+                        "crops", 
+                        "WW"
+                    ]
+                }, 
+                {
+                    "date": "2011-04-13", 
+                    "amount": [
+                        27.0, 
+                        "mm"
+                    ], 
+                    "type": "Irrigation"
+                }, 
+                {
+                    "date": "2011-04-21", 
+                    "amount": [
+                        27.0, 
+                        "mm"
+                    ], 
+                    "type": "Irrigation"
+                }, 
+                {
+                    "date": "2011-05-04", 
+                    "amount": [
+                        27.0, 
+                        "mm"
+                    ], 
+                    "type": "Irrigation"
+                }, 
+                {
+                    "date": "2011-05-19", 
+                    "amount": [
+                        35.0, 
+                        "mm"
+                    ], 
+                    "type": "Irrigation"
+                }, 
+                {
+                    "date": "2011-02-18", 
+                    "amount": [
+                        40.0, 
+                        "kg N"
+                    ], 
+                    "partition": [
+                        "include-from-file", 
+                        "monica_simulation_setup/monica_parameters/mineral-fertilisers/AN.json"
+                    ], 
+                    "type": "MineralFertilization"
+                }, 
+                {
+                    "date": "2011-03-25", 
+                    "amount": [
+                        100.0, 
+                        "kg N"
+                    ], 
+                    "partition": [
+                        "include-from-file", 
+                        "monica_simulation_setup/monica_parameters/mineral-fertilisers/AN.json"
+                    ], 
+                    "type": "MineralFertilization"
+                }, 
+                {
+                    "date": "2011-04-26", 
+                    "amount": [
+                        60.0, 
+                        "kg N"
+                    ], 
+                    "partition": [
+                        "include-from-file", 
+                        "monica_simulation_setup/monica_parameters/mineral-fertilisers/AN.json"
+                    ], 
+                    "type": "MineralFertilization"
+                }, 
+                {
+                    "max-3d-precip-sum": 5, 
+                    "harvest-time": "maturity", 
+                    "max-curr-day-precip": 1, 
+                    "min-%-asw": 0, 
+                    "max-%-asw": 100, 
+                    "latest-date": "0000-09-01", 
+                    "type": "AutomaticHarvest"
+                }
+            ]
+        }
+    ], 
+    "CropParameters": {
+        "=": [
+            "include-from-file", 
+            "monica_simulation_setup/monica_parameters/general/crop.json"
+        ]
+    }
+}

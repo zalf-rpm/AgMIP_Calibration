@@ -1,0 +1,74 @@
+{
+    "UseAutomaticIrrigation": false, 
+    "climate.csv": "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step1/monica_simulation_setup/input_data/climate/climate_10170.csv", 
+    "site.json": "site-17.json", 
+    "start-date": "2013-08-01", 
+    "EmergenceFloodingControlOn": false, 
+    "NumberOfLayers": 20, 
+    "UseNMinMineralFertilisingMethod": false, 
+    "EmergenceMoistureControlOn": false, 
+    "debug?": false, 
+    "crop.json": "crop-17.json", 
+    "WaterDeficitResponseOn": true, 
+    "climate.csv-options": {
+        "csv-separator": ",", 
+        "no-of-climate-file-header-lines": 1
+    }, 
+    "use-leap-years": true, 
+    "UseSecondaryYields": true, 
+    "LayerThickness": [
+        0.1, 
+        "m"
+    ], 
+    "output": {
+        "csv-separator": ";", 
+        "write-file?": false, 
+        "include-unit-rows": true, 
+        "path-to-output": "runs/2018-07-02/", 
+        "include-header-row": true, 
+        "events": [
+            "crop", 
+            [
+                [
+                    "Year", 
+                    "LAST"
+                ], 
+                [
+                    "Yield", 
+                    "LAST"
+                ], 
+                [
+                    "AbBiom|Biom-ma", 
+                    "LAST"
+                ], 
+                [
+                    "DOY|Mat", 
+                    "LAST"
+                ]
+            ], 
+            "anthesis", 
+            [
+                [
+                    "Year", 
+                    "LAST"
+                ], 
+                "AbBiom|Biom-an", 
+                "DOY|Ant", 
+                "AbBiomN|CroN-an"
+            ], 
+            "maturity", 
+            [
+                [
+                    "Year", 
+                    "LAST"
+                ], 
+                "AbBiom|Biom-ma", 
+                "DOY|Mat", 
+                "AbBiomN|CroN-ma"
+            ]
+        ]
+    }, 
+    "NitrogenResponseOn": true, 
+    "include-file-base-path": "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step1/", 
+    "end-date": "2014-12-31"
+}

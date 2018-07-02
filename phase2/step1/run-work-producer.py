@@ -19,17 +19,9 @@
 import json
 import sys
 import datetime
-import numpy as np
-import collections
 import time
 import zmq
 import monica_io
-#import soil_io
-#import ascii_io
-#from datetime import date, timedelta
-#import copy
-import os
-#from collections import defaultdict
 import pandas as pd
 
 #############################################################
@@ -49,23 +41,154 @@ PATHS = {
 
 def run_producer():
 
+    # some options and configurations
+    create_simulation_files = False
+
+    activate_debug = True
+    training_mode = True
+    run_via_simulation_files = True
+    output_dir = "runs/2018-07-02/"
+
+    # overwrite some settings if creation of simulation files is active
+    if create_simulation_files:
+        run_via_simulation_files = False
+        training_mode = False
+
+    # technical initialisation
     config = {
         "user": "specka",
         "port": "66666",
         "server": "localhost"
     }
 
-    training_mode = False
-    output_dir = "runs/2018-06-29/"
+    sent_id = 0
+    start_send = time.clock()
+    socket = initialise_sockets(config)
+    print(socket)
+
+    # output file
     output_filename = "agmip_calibration_phase2_step1_evaluation.csv"
     if training_mode:
         output_filename = "agmip_calibration_phase2_step1_calibration.csv"
 
     paths = PATHS[config["user"]]
 
+    # read in management information
     management_file = paths["INCLUDE_FILE_BASE_PATH"] + "monica_simulation_setup/input_data/cal2_phenology_mgt_soil_data.txt"
     management_df = pd.read_csv(management_file, sep='\t', header=0, index_col=None, keep_default_na=False,
                                 encoding="latin1")
+
+    # iterate over every row/environment where row contains the setup of one simulation
+    for environment in management_df.iterrows():
+
+        simulation_row = environment[1]
+        sim_id = int(simulation_row["n"])
+        print("Run simulation " + str(sim_id))
+
+        if sim_id != 11:
+            continue
+
+        if training_mode:
+            # calibration mode
+            if simulation_row["Date_observee_Epi_1cm"] == "NA":
+                print("Skip evaluation simulation because testing mode is active")
+                continue
+
+        sim_parameters = None
+        site_parameters = None
+        crop_parameters = None
+
+        if run_via_simulation_files:
+            # run from existing simulation files
+            print("Run from MONICA simulation files ...")
+
+            simulation_dir = "monica_simulation_setup/calibration/"
+            if simulation_row["Date_observee_Epi_1cm"] == "NA":
+                simulation_dir = "monica_simulation_setup/evaluation/"
+
+            with open(simulation_dir + "sim-" + str(sim_id) + ".json") as fp:
+                sim_parameters = json.load(fp)
+
+            with open(simulation_dir + "site-" + str(sim_id) + ".json") as fp:
+                site_parameters = json.load(fp)
+
+            with open(simulation_dir + "crop-" + str(sim_id) + ".json") as fp:
+                crop_parameters = json.load(fp)
+
+        else:
+            # dynamically create simulation objects
+            print("Dynamic run by creating simulation objects directly from AgMIP management file.")
+            site_parameters = create_site_parameters(simulation_row)
+            crop_parameters = create_crop_parameters(simulation_row)
+            sim_parameters = create_sim_parameters(simulation_row, paths["INCLUDE_FILE_BASE_PATH"], sim_id, output_dir,
+                                                   activate_debug, create_simulation_files)
+
+        if site_parameters is None:
+            print("ERROR: site_parameters == None")
+        if crop_parameters is None:
+            print("ERROR: crop_parameters == None")
+        if sim_parameters is None:
+            print("ERROR: sim_parameters == None")
+
+        # check if just MONICA simulation files should be created from the provided input files
+        # do'nt send any information if input files should be created
+        if create_simulation_files:
+            dir = "monica_simulation_setup/calibration/"
+            if simulation_row["Date_observee_Epi_1cm"] == "NA":
+                dir="monica_simulation_setup/evaluation/"
+
+            with open(dir + "site-" + str(sim_id) + ".json", "w") as fp:
+                json.dump(site_parameters, fp=fp, indent=4)
+
+            with open(dir + "crop-" + str(sim_id) + ".json", "w") as fp:
+                json.dump(crop_parameters, fp=fp, indent=4)
+
+            with open(dir + "sim-" + str(sim_id) + ".json", "w") as fp:
+                json.dump(sim_parameters, fp=fp, indent=4)
+            continue
+
+
+
+        env_map = {
+            "crop": crop_parameters,
+            "site": site_parameters,
+            "sim": sim_parameters
+        }
+        env = monica_io.create_env_json_from_json_config(env_map)
+
+        # final env object with all necessary information
+        env["customId"] = {
+            "id": sim_id,
+            "calibration": training_mode,
+            "sim_dir": output_dir,
+            "output_filename": output_filename,
+            "bbch30": get_monica_date_string(simulation_row["Date_observee_Epi_1cm"]),  # observation bbch 30
+            "bbch55": get_monica_date_string(simulation_row["Date_observee_Epiaison"])  # observation bbch 55
+        }
+
+        with open("monica_simulation_setup/env.json", "w") as fp:
+            json.dump(env, fp=fp, indent=4)
+
+
+        # sending env object to MONICA ZMQ
+        print("sent env ", sent_id, " customId: ", env["customId"])
+        socket.send_json(env)
+        sent_id += 1
+
+    stop_send = time.clock()
+
+    # just tell the sending time if objects have really been sent
+    if not create_simulation_files:
+        print("sending ", sent_id, " envs took ", (stop_send - start_send), " seconds")
+
+#############################################################
+#############################################################
+#############################################################
+
+
+def initialise_sockets(config):
+
+    """ Initialises the socket based on command line parameter information"""
 
     context = zmq.Context()
     socket = context.socket(zmq.PUSH)
@@ -76,107 +199,39 @@ def run_producer():
             if k in config:
                 config[k] = v
 
-    sent_id = 0
-    start_send = time.clock()
     socket.connect("tcp://" + config["server"] + ":" + str(config["port"]))
+    return socket
 
-    for environment in management_df.iterrows():
+#############################################################
+#############################################################
+#############################################################
 
-        simulation_row = environment[1]
-        sim_id = int(simulation_row["n"])
-
-        # just for testing only run one simulation
-        # if sim_id>12:
-        #    continue
-
-        if training_mode:
-            # calibration mode
-
-            if simulation_row["Date_observee_Epi_1cm"] == "NA":
-                print("Skip evaluation simulation because testing mode is active")
-                continue
-
-        print("Run simulation " + str(sim_id))
-
-        site_parameters = create_site_parameters(simulation_row)
-        crop_parameters = create_crop_parameters(simulation_row)
-        sim_parameters = create_sim_parameters(simulation_row, paths["INCLUDE_FILE_BASE_PATH"], sim_id)
-
-        #
-        with open("monica_simulation_setup/site-" + str(sim_id) + ".json", "w") as fp:
-            json.dump(site_parameters, fp=fp, indent=4)
-
-        with open("monica_simulation_setup/crop-" + str(sim_id) + ".json", "w") as fp:
-            json.dump(crop_parameters, fp=fp, indent=4)
-
-        with open("monica_simulation_setup/sim-" + str(sim_id) + ".json", "w") as fp:
-            json.dump(sim_parameters, fp=fp, indent=4)
-
-        env_map = {
-            "crop": crop_parameters,
-            "site": site_parameters,
-            "sim": sim_parameters,
-            "climate": ""
-        }
-        env = monica_io.create_env_json_from_json_config(env_map)
-
-        bbch30 = get_monica_date_string(simulation_row["Date_observee_Epi_1cm"])
-        bbch55 = get_monica_date_string(simulation_row["Date_observee_Epiaison"])
-
-
-        env["customId"] = {
-            "id": sim_id,
-            "calibration": training_mode,
-            "sim_dir": output_dir,
-            "output_filename": output_filename,
-            "bbch30": bbch30,
-            "bbch55": bbch55
-        }
-
-        #fp = open("runs/env.json", "w")
-        #json.dump(env, fp=fp,  indent=4)
-        #fp.close()
-
-        socket.send_json(env)
-        print("sent env ", sent_id, " customId: ", env["customId"])
-        sent_id += 1
-
-    stop_send = time.clock()
-    print("sending ", sent_id, " envs took ", (stop_send - start_send), " seconds")
-
-########################################################
 
 def get_climate_information():
 
+    """ Setups static information about climate files of the study. """
+    #
     climate_csv_config = {
-        "no-of-climate-file-header-lines": 5,
-        "csv-separator": ";",
-        "header-to-acd-names": {
-            "SRAD": "globrad",
-            "DD": "day",
-            "MM": "month",
-            "YYYY": "year",
-            "RAIN": "precip",
-            "TMAX": "tmax",
-            "TMIN": "tmin",
-            "WIND": "wind",
-            "RHUM": "relhumid"
-        }
+        "no-of-climate-file-header-lines": 1,
+        "csv-separator": ","
     }
 
     climate_file_map = {
-        "73": "meteo2590.csv",
-        "87": "meteo10170.csv",
-        "206": "meteo21110.csv",
-        "153": "meteo27110.csv",
-        "129": "meteo41240.csv",
-        "93": "meteo56500.csv",
-        "109": "meteo91720.csv"
+        "73": "climate_2590.csv",
+        "87": "climate_10170.csv",
+        "206": "climate_21110.csv",
+        "153": "climate_27110.csv",
+        "129": "climate_41240.csv",
+        "93": "climate_56500.csv",
+        "109": "climate_91720.csv"
     }
 
     return climate_csv_config, climate_file_map
 
-########################################################
+#############################################################
+#############################################################
+#############################################################
+
 
 def get_monica_date_string(date):
 
@@ -188,10 +243,12 @@ def get_monica_date_string(date):
     new_date = datetime.datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d")
     return new_date
 
-########################################################
+#############################################################
+#############################################################
+#############################################################
 
 
-def create_sim_parameters(mgt_row, include_path, sim_id):
+def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_debug, create_files):
 
     """ Creates simulation object based on information provided by the Agmip files. """
 
@@ -203,12 +260,18 @@ def create_sim_parameters(mgt_row, include_path, sim_id):
     sim_parameters["end-date"] = str(harvest_year) + "-12-31"
     sim_parameters["use-leap-years"] = True
 
-    sim_parameters["crop.json"] = "crop-" + str(sim_id) + ".json"
-    sim_parameters["site.json"] = "site-" + str(sim_id) + ".json"
-    sim_parameters["debug?"] = True
+    if create_files:
+        sim_parameters["crop.json"] = "crop-" + str(sim_id) + ".json"
+        sim_parameters["site.json"] = "site-" + str(sim_id) + ".json"
+
+    sim_parameters["debug?"] = activate_debug
 
     output_map = {
         "write-file?": False,
+        "path-to-output": output_dir,
+        "include-header-row": True,
+        "include-unit-rows": True,
+        "csv-separator": ";",
 
         "events": [
             "crop", [
@@ -244,6 +307,8 @@ def create_sim_parameters(mgt_row, include_path, sim_id):
     sim_parameters["WaterDeficitResponseOn"] = True
     sim_parameters["EmergenceMoistureControlOn"] = False
     sim_parameters["EmergenceFloodingControlOn"] = False
+    sim_parameters["UseAutomaticIrrigation"] = False
+    sim_parameters["UseNMinMineralFertilisingMethod"] = False
 
     # climate file setup
     elevation = str(mgt_row["Altitude"])
@@ -257,7 +322,9 @@ def create_sim_parameters(mgt_row, include_path, sim_id):
 
     return sim_parameters
 
-########################################################
+#############################################################
+#############################################################
+#############################################################
 
 
 def create_crop_parameters(mgt_row):
@@ -291,7 +358,7 @@ def create_crop_parameters(mgt_row):
     for event in range(1, number_of_irrigation_events + 1):
         date = get_monica_date_string(mgt_row["Date_" + str(event) + "_Irrigation"])
         dose = float(mgt_row["Dose_" + str(event) + "_Irrigation"])
-        irrigation_step = {"date": date, "type": "Irrigation", "amount": dose}
+        irrigation_step = {"date": date, "type": "Irrigation", "amount": [dose, "mm"]}
         workstep_list.append(irrigation_step)
 
     # fertilization steps -------------------------
@@ -333,9 +400,9 @@ def create_crop_parameters(mgt_row):
                 "is-winter-crop": True,
                 "cropParams": {
                     "species": ["include-from-file", "monica_simulation_setup/monica_parameters/crops/" + crop_name + ".json"],
-                    "cultivar": ["include-from-file", "monica_simulation_setup/monica_parameters/crops/" + crop_name + "/" + crop_variety + ".json"],
+                    "cultivar": ["include-from-file", "monica_simulation_setup/monica_parameters/crops/" + crop_name + "/" + crop_variety + ".json"]
                 },
-                "residueParams": ["include-from-file", "monica_simulation_setup/monica_parameters/crop-residues/" + crop_name + ".json"],
+                "residueParams": ["include-from-file", "monica_simulation_setup/monica_parameters/crop-residues/" + crop_name + ".json"]
             }
         },
         "cropRotation": [{"worksteps": workstep_list}],
@@ -346,9 +413,10 @@ def create_crop_parameters(mgt_row):
 
     return crop_parameters
 
+#############################################################
+#############################################################
+#############################################################
 
-
-########################################################
 
 def create_site_parameters(mgt_row):
 
@@ -359,8 +427,7 @@ def create_site_parameters(mgt_row):
         "Latitude": float(mgt_row['Latitude']),
         "Slope": 0.01,                          #???
         "HeightNN": [float(mgt_row['Altitude']), "m"],
-        "NDeposition": [30, "kg N ha-1 y-1"],   #???
-        #"pH": 6.5                               #???
+        "NDeposition": [30, "kg N ha-1 y-1"]
     }
 
     # Soil Parameters per Horizona
@@ -397,7 +464,7 @@ def create_site_parameters(mgt_row):
     site["SiteParameters"] = site_parameters
 
     # additional MONICA parameters
-    site["SoilTemperatureParameters"] = ["include-from-file", "monica_simulation_setup/monica_parameters/general/soil-temperature.json"],
+    site["SoilTemperatureParameters"] = ["include-from-file", "monica_simulation_setup/monica_parameters/general/soil-temperature.json"]
     site["EnvironmentParameters"] = {
                                  "=": ["include-from-file", "monica_simulation_setup/monica_parameters/general/environment.json"],
                                  "LeachingDepth": 2.0,
@@ -408,10 +475,12 @@ def create_site_parameters(mgt_row):
     site["SoilTransportParameters"] = ["include-from-file", "monica_simulation_setup/monica_parameters/general/soil-transport.json"]
     site["SoilMoistureParameters"] = ["include-from-file", "monica_simulation_setup/monica_parameters/general/soil-moisture.json"]
 
-
     return site
 
-##################################################################
+#############################################################
+#############################################################
+#############################################################
+
 
 if __name__ == "__main__":
     run_producer()

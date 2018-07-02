@@ -1,0 +1,10 @@
+MONICA ausführen
+----------------
+- Konsole öffnen
+- monica-zmq-server -bi -i tcp://*:66666 -bo -o tcp://*:77776
+
+Consumer und Producer ausführen
+-------------------------------
+- PyCharm öffnen
+- Consumer über fertige configuration ausführen (python run_work_consumer.py server=localhost)
+- Producer über interne Konsole starten (python run_work_producer.py server=localhost

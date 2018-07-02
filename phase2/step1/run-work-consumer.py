@@ -91,25 +91,24 @@ def run_consumer():
 
             #print("Received work result 1 - ", received_env_count, " customId: ", result["customId"])
             #write_bcd_output_file(result)
-
+            print("\n")
             print ("received work result ", received_env_count, " customId: ", str(
                 result.get("customId", "").values()))
+            print(result)
 
             custom_id = result["customId"]
-
-
             output_file = custom_id["sim_dir"] + custom_id["output_filename"]
 
-
-            # with open("out/out-" + str(i) + ".csv", 'wb') as _:
+            print("Write output file:", output_file)
             with open(output_file, 'wb') as _:
                 writer = csv.writer(_, delimiter=",")
 
                 for data_ in result.get("input_data", []):
+                    print(data_)
                     results = data_.get("results", [])
                     orig_spec = data_.get("origSpec", "")
                     output_ids = data_.get("outputIds", [])
-
+                    print(results)
                     if len(results) > 0:
                         writer.writerow([orig_spec.replace("\"", "")])
                         for row in monica_io.write_output_header_rows(output_ids,
