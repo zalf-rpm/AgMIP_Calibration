@@ -68,7 +68,7 @@ def run_consumer():
     socket.connect("tcp://" + config["server"] + ":" + config["port"])
     socket.RCVTIMEO = 1000
     leave = False
-    write_normal_output_files = True
+    write_normal_output_files = False
 
     while not leave:
 
@@ -94,10 +94,11 @@ def run_consumer():
             print("\n")
             print ("received work result ", received_env_count, " customId: ", str(
                 result.get("customId", "").values()))
-            print(result)
+
 
             custom_id = result["customId"]
             output_file = custom_id["sim_dir"] + custom_id["output_filename"]
+            print(result)
 
             print("Write output file:", output_file)
             with open(output_file, 'wb') as _:
@@ -105,10 +106,11 @@ def run_consumer():
 
                 for data_ in result.get("input_data", []):
                     print(data_)
+
                     results = data_.get("results", [])
                     orig_spec = data_.get("origSpec", "")
                     output_ids = data_.get("outputIds", [])
-                    print(results)
+                    print("Results:", results)
                     if len(results) > 0:
                         writer.writerow([orig_spec.replace("\"", "")])
                         for row in monica_io.write_output_header_rows(output_ids,
@@ -118,6 +120,7 @@ def run_consumer():
                             writer.writerow(row)
 
                         for row in monica_io.write_output(output_ids, results):
+                            print(row)
                             writer.writerow(row)
 
                     writer.writerow([])
@@ -137,22 +140,20 @@ writes them to filesystem. Output filename is passed with custom_id object.
 def write_bcd_output_file(result):
 
     custom_id = result["customId"]
-    site_name = custom_id["site"]
+    sim_id = custom_id["id"]
+    output_file = custom_id["sim_dir"] + custom_id["output_filename"]
+    calibration_mode = custom_id["calibration"]
+    bbch_30_observed = custom_id["bbch30"]
+    bbch_55_observed = custom_id["bbch55"]
+
     print ("Received results from %s" % custom_id["output_filename"])
 
-    with open("out/2018-06-26/" + custom_id["output_filename"], 'wb') as fp:
+    with open(output_file, 'wb') as fp:
+
         writer = csv.writer(fp, delimiter="\t")
-        writer.writerow(["BCD3_2017"])
-        writer.writerow(["Model: MO"])
-        writer.writerow(["Modeler_name: Xenia Specka"])
-        writer.writerow(["Simulation:"])
-        writer.writerow(["Site: " + site_name])
-        writer.writerow(["Model", "Info", "Year", "Yield", "Biom-an", "Biom-ma", "MaxLAI", "Ant", "Mat",
-                         "Nleac", "WDrain", "CroN-an", "CroN-ma", "GrainN", "GNumber", "CumET", "Nmin",
-                         "Nvol", "Nimmo", "Nden", "SoilAvW", "SoilN", "PET", "Transp"])
-        writer.writerow(["CodeN", "level", "season", "(t/ha)", "(t/ha)", "(t/ha)", "(-)", "(DOY)", "(DOY)",
-                         "kgN/ha", "(mm)", "kgN/ha", "kgN/ha", "kgN/ha", "(/m2)", "(mm)", "kgN/ha", "kgN/ha",
-                         "kgN/ha", "kgN/ha", "(mm)", "kgN/ha", "(mm)", "(mm)"])
+        writer.writerow(["number", "site", "variety", "date_sowing", "simulated_date_emergence_dd/mm/yyyy",
+                         "simulated_date_BBCH30_dd/mm/yyyy", "simulated_date_BBCH55_dd/mm/yyyy"])
+
 
         year_to_vals = defaultdict(dict)
         for data in result.get("input_data", []):
@@ -182,18 +183,11 @@ def write_bcd_output_file(result):
                             vals[name] = val_
                     else:
                         vals[name] = val
+                    print(vals)
 
-                #print(vals)
-
-                if "Year" not in vals:
-                    print("Missing Year in result section. Skipping results section.")
-                    continue
-
-                year_to_vals[vals["Year"]].update(vals)
-
-        rows = create_output_rows(year_to_vals)
-        for row in rows:
-            writer.writerow(row)
+        # rows = create_output_rows(vals)
+        # for row in rows:
+        #     writer.writerow(row)
 
 ########################################################################
 ########################################################################

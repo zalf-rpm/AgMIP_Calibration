@@ -84,7 +84,7 @@
                     "max-curr-day-precip": 1, 
                     "min-%-asw": 0, 
                     "max-%-asw": 100, 
-                    "latest-date": "0000-09-01", 
+                    "latest-date": "0001-09-01", 
                     "type": "AutomaticHarvest"
                 }
             ]

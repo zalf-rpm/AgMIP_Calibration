@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-
+import datetime
 input_climate_file = "cal2_weather.xlsx"
 
 # open excel file with pandas
@@ -25,8 +25,9 @@ for sheet_name in sheets:
 
         for df_row in sheet_df.iterrows():
             row_value = df_row[1]
+            date = datetime.date(year=int(row_value['YYYY']), month=int(row_value['MM']), day=int(row_value['DD']))
+            date_str = date.isoformat()
 
-            date = str(row_value['YYYY']) + "-" + str(row_value['MM']) + "-" + str(row_value['DD'])
             globrad = round(float(row_value['SRAD']), 3)
             tmin = round(float(row_value['TMIN']), 2)
             tmax = round(float(row_value['TMAX']), 2)

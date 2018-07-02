@@ -44,7 +44,7 @@ def run_producer():
     # some options and configurations
     create_simulation_files = False
 
-    activate_debug = True
+    activate_debug = False
     training_mode = True
     run_via_simulation_files = True
     output_dir = "runs/2018-07-02/"
@@ -83,10 +83,10 @@ def run_producer():
 
         simulation_row = environment[1]
         sim_id = int(simulation_row["n"])
-        print("Run simulation " + str(sim_id))
 
-        if sim_id != 11:
-            continue
+
+        # if sim_id != 11 and not create_simulation_files:
+        #     continue
 
         if training_mode:
             # calibration mode
@@ -94,6 +94,7 @@ def run_producer():
                 print("Skip evaluation simulation because testing mode is active")
                 continue
 
+        print("Run simulation " + str(sim_id))
         sim_parameters = None
         site_parameters = None
         crop_parameters = None
@@ -147,14 +148,14 @@ def run_producer():
                 json.dump(sim_parameters, fp=fp, indent=4)
             continue
 
-
-
         env_map = {
             "crop": crop_parameters,
             "site": site_parameters,
             "sim": sim_parameters
         }
         env = monica_io.create_env_json_from_json_config(env_map)
+
+
 
         # final env object with all necessary information
         env["customId"] = {
@@ -267,11 +268,6 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
     sim_parameters["debug?"] = activate_debug
 
     output_map = {
-        "write-file?": False,
-        "path-to-output": output_dir,
-        "include-header-row": True,
-        "include-unit-rows": True,
-        "csv-separator": ";",
 
         "events": [
             "crop", [
@@ -301,7 +297,6 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
 
     sim_parameters["NumberOfLayers"] = 20
     sim_parameters["LayerThickness"] = [0.1, "m"]
-
     sim_parameters["UseSecondaryYields"] = True
     sim_parameters["NitrogenResponseOn"] = True
     sim_parameters["WaterDeficitResponseOn"] = True
@@ -315,6 +310,8 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
     climate_csv_config, climate_file_map = get_climate_information()
 
     sim_parameters["climate.csv-options"] = climate_csv_config
+    sim_parameters["climate.csv-options"]["start-date"] = sim_parameters["start-date"]
+    sim_parameters["climate.csv-options"]["end-date"] = sim_parameters["end-date"]
 
     climate_path = include_path + "monica_simulation_setup/input_data/climate/" + climate_file_map[elevation]
     sim_parameters["climate.csv"] = climate_path
@@ -385,7 +382,7 @@ def create_crop_parameters(mgt_row):
     # harvest step -------------------------------
     harvest_step = {
         "type": "AutomaticHarvest",
-        "latest-date": "0000-09-01",
+        "latest-date": "0001-09-01",
         "min-%-asw": 0,
         "max-%-asw": 100,
         "max-3d-precip-sum": 5,

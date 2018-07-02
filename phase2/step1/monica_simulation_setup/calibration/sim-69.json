@@ -12,7 +12,9 @@
     "WaterDeficitResponseOn": true, 
     "climate.csv-options": {
         "csv-separator": ",", 
-        "no-of-climate-file-header-lines": 1
+        "end-date": "2016-12-31", 
+        "no-of-climate-file-header-lines": 1, 
+        "start-date": "2015-08-01"
     }, 
     "use-leap-years": true, 
     "UseSecondaryYields": true, 
@@ -21,11 +23,6 @@
         "m"
     ], 
     "output": {
-        "csv-separator": ";", 
-        "write-file?": false, 
-        "include-unit-rows": true, 
-        "path-to-output": "runs/2018-07-02/", 
-        "include-header-row": true, 
         "events": [
             "crop", 
             [
