@@ -11,8 +11,11 @@
     "crop.json": "crop-44.json", 
     "WaterDeficitResponseOn": true, 
     "climate.csv-options": {
-        "csv-separator": ",", 
         "end-date": "2013-12-31", 
+        "csv-separator": ",", 
+        "header-to-acd-names": {
+            "et0": "et0"
+        }, 
         "no-of-climate-file-header-lines": 1, 
         "start-date": "2012-08-01"
     }, 
@@ -24,44 +27,73 @@
     ], 
     "output": {
         "events": [
-            "crop", 
-            [
-                [
-                    "Year", 
-                    "LAST"
-                ], 
-                [
-                    "Yield", 
-                    "LAST"
-                ], 
-                [
-                    "AbBiom|Biom-ma", 
-                    "LAST"
-                ], 
-                [
-                    "DOY|Mat", 
-                    "LAST"
-                ]
-            ], 
             "anthesis", 
             [
-                [
-                    "Year", 
-                    "LAST"
-                ], 
-                "AbBiom|Biom-an", 
-                "DOY|Ant", 
-                "AbBiomN|CroN-an"
+                "Date|Ant"
             ], 
             "maturity", 
             [
+                "Date|Mat"
+            ], 
+            [
+                "while", 
+                "Stage", 
+                "=", 
+                2
+            ], 
+            [
                 [
-                    "Year", 
-                    "LAST"
-                ], 
-                "AbBiom|Biom-ma", 
-                "DOY|Mat", 
-                "AbBiomN|CroN-ma"
+                    "Date|EmergeDate", 
+                    "FIRST"
+                ]
+            ], 
+            [
+                "while", 
+                "Stage", 
+                "=", 
+                3
+            ], 
+            [
+                [
+                    "Date|BeginStage3", 
+                    "FIRST"
+                ]
+            ], 
+            [
+                "while", 
+                "Stage", 
+                "=", 
+                4
+            ], 
+            [
+                [
+                    "Date|BeginStage4", 
+                    "FIRST"
+                ]
+            ], 
+            [
+                "while", 
+                "TempSum", 
+                ">=", 
+                292.5
+            ], 
+            [
+                [
+                    "Date|BBCH30", 
+                    "FIRST"
+                ]
+            ], 
+            [
+                "while", 
+                "TempSum", 
+                ">=", 
+                570
+            ], 
+            [
+                [
+                    "Date|BBCH55", 
+                    "FIRST"
+                ]
             ]
         ]
     }, 

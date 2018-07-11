@@ -18,6 +18,7 @@
 
 import json
 import sys
+sys.path.append("C:\\Users\\specka\\AppData\\Local\\MONICA")
 import datetime
 import time
 import zmq
@@ -42,12 +43,28 @@ PATHS = {
 def run_producer():
 
     # some options and configurations
-    create_simulation_files = False
+    create_simulation_files = True
 
-    activate_debug = False
+    # calibration options
     training_mode = True
-    run_via_simulation_files = True
-    output_dir = "runs/2018-07-02/"
+    calibrate_apache = True
+
+    # simulation options
+    activate_debug = False
+    run_via_simulation_files = False
+    output_dir = "runs/2018-07-09/"
+
+    # calibration -------------------------------------
+    # original "StageTemperatureSum": [[148, 284, 380, 180, 420, 25 ], "\u00b0C d"]
+    stage1_sum = 120
+    stage2_sum = 200 # 340
+    stage3_sum = 550 # 407
+    # ------------------------------------------------
+
+    # based on Christian Kersebaums assumptions
+
+    tsum_bbch55 = (stage2_sum + stage3_sum) - 180
+    tsum_bbch30 = (stage3_sum - 180) * 0.25 + stage2_sum
 
     # overwrite some settings if creation of simulation files is active
     if create_simulation_files:
@@ -84,14 +101,18 @@ def run_producer():
         simulation_row = environment[1]
         sim_id = int(simulation_row["n"])
 
-
-        # if sim_id != 11 and not create_simulation_files:
-        #     continue
+        # just for test runs stop after sending one element
+        # if sent_id == 1 and create_simulation_files == False:
+        # break
 
         if training_mode:
             # calibration mode
             if simulation_row["Date_observee_Epi_1cm"] == "NA":
                 print("Skip evaluation simulation because testing mode is active")
+                continue
+
+            if calibrate_apache and simulation_row["Variete"] != "Apache":
+                # calibration mode active but sim_id refers to wrong cultivar
                 continue
 
         print("Run simulation " + str(sim_id))
@@ -122,7 +143,7 @@ def run_producer():
             site_parameters = create_site_parameters(simulation_row)
             crop_parameters = create_crop_parameters(simulation_row)
             sim_parameters = create_sim_parameters(simulation_row, paths["INCLUDE_FILE_BASE_PATH"], sim_id, output_dir,
-                                                   activate_debug, create_simulation_files)
+                                                   activate_debug, create_simulation_files, tsum_bbch30, tsum_bbch55 )
 
         if site_parameters is None:
             print("ERROR: site_parameters == None")
@@ -156,6 +177,19 @@ def run_producer():
         env = monica_io.create_env_json_from_json_config(env_map)
 
 
+        # calibration
+
+        # for calibration overwrite stage temperature sum values
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]["StageTemperatureSum"][0][1] = stage2_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]["StageTemperatureSum"][0][
+            2] = stage3_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]["StageTemperatureSum"][0][
+            0] = stage1_sum
+
+        temp_sum = env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]["StageTemperatureSum"][0]
+        bbch30_tempsum = temp_sum[0] + temp_sum[1] + 0.25 * (temp_sum[3])
 
         # final env object with all necessary information
         env["customId"] = {
@@ -163,8 +197,11 @@ def run_producer():
             "calibration": training_mode,
             "sim_dir": output_dir,
             "output_filename": output_filename,
-            "bbch30": get_monica_date_string(simulation_row["Date_observee_Epi_1cm"]),  # observation bbch 30
-            "bbch55": get_monica_date_string(simulation_row["Date_observee_Epiaison"])  # observation bbch 55
+            "cultivar": simulation_row["Variete"],
+            "sowing_date": simulation_row["Date_Semis"],
+            "bbch30": simulation_row["Date_observee_Epi_1cm"],      # observation bbch 30
+            "bbch55": simulation_row["Date_observee_Epiaison"],     # observation bbch 55
+            "site": simulation_row["Libelle"]
         }
 
         with open("monica_simulation_setup/env.json", "w") as fp:
@@ -214,7 +251,10 @@ def get_climate_information():
     #
     climate_csv_config = {
         "no-of-climate-file-header-lines": 1,
-        "csv-separator": ","
+        "csv-separator": ",",
+        "header-to-acd-names": {
+            "et0": "et0"
+        }
     }
 
     climate_file_map = {
@@ -249,7 +289,7 @@ def get_monica_date_string(date):
 #############################################################
 
 
-def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_debug, create_files):
+def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_debug, create_files, tsum_30, tsum_55):
 
     """ Creates simulation object based on information provided by the Agmip files. """
 
@@ -270,26 +310,27 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
     output_map = {
 
         "events": [
-            "crop", [
-                ["Year", "LAST"],
-                ["Yield", "LAST"],
-                ["AbBiom|Biom-ma", "LAST"],
-                ["DOY|Mat", "LAST"]
-            ],
-
             "anthesis", [
-                ["Year", "LAST"],
-                "AbBiom|Biom-an",
-                "DOY|Ant",
-                "AbBiomN|CroN-an"
+                "Date|Ant"
             ],
-
             "maturity", [
-                ["Year", "LAST"],
-                "AbBiom|Biom-ma",
-                "DOY|Mat",
-                "AbBiomN|CroN-ma"
+                "Date|Mat",
             ],
+            ["while", "Stage", "=", 2], [
+                ["Date|EmergeDate", "FIRST"]
+            ],
+            ["while", "Stage", "=", 3], [
+                ["Date|BeginStage3", "FIRST"]
+            ],
+            ["while", "Stage", "=", 4], [
+                ["Date|BeginStage4", "FIRST"]
+            ],
+            ["while", "TempSum", ">=", tsum_30], [
+                ["Date|BBCH30", "FIRST"]
+            ],
+            ["while", "TempSum", ">=", tsum_55], [
+                ["Date|BBCH55", "FIRST"]
+            ]
         ]
     }
 
@@ -391,6 +432,13 @@ def create_crop_parameters(mgt_row):
     }
     workstep_list.append(harvest_step)
 
+    # test to externally set ET0
+    # harvest_year = int(mgt_row["Annee_Recolte"])
+    # start_date = datetime.datetime(day=1, month=8, year=harvest_year-1)
+    # end_date = datetime.datetime(day=31, month=12, year=harvest_year)
+    # for date in daterange(start_date, end_date):
+    #        workstep_list.append({"type": "SetValue", "date": date.strftime("%Y-%m-%d"), "var": "ET0", "value": ["=", 0.5]})
+
     crop_parameters = {
         "crops" : {
             crop_species: {
@@ -408,11 +456,16 @@ def create_crop_parameters(mgt_row):
         }
     }
 
+
     return crop_parameters
 
 #############################################################
 #############################################################
 #############################################################
+
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days)):
+        yield start_date + datetime.timedelta(n)
 
 
 def create_site_parameters(mgt_row):
