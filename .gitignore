@@ -2,3 +2,4 @@
 /.idea
 /phase2/step1/runs/env.json
 /phase2/step1/runs
+/phase2/step1/MultiExpCalibrator_parallel/*.pyc
