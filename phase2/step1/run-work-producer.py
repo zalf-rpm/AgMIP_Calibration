@@ -43,22 +43,22 @@ PATHS = {
 def run_producer():
 
     # some options and configurations
-    create_simulation_files = True
+    create_simulation_files = False
 
     # calibration options
     training_mode = True
-    calibrate_apache = True
+    calibrate_apache = False
 
     # simulation options
     activate_debug = False
     run_via_simulation_files = False
-    output_dir = "runs/2018-07-09/"
+    output_dir = "runs/2018-07-16/"
 
     # calibration -------------------------------------
     # original "StageTemperatureSum": [[148, 284, 380, 180, 420, 25 ], "\u00b0C d"]
-    stage1_sum = 120
-    stage2_sum = 200 # 340
-    stage3_sum = 550 # 407
+    stage1_sum = 148
+    stage2_sum = 100 # 340
+    stage3_sum = 670 # 407
     # ------------------------------------------------
 
     # based on Christian Kersebaums assumptions
@@ -111,9 +111,14 @@ def run_producer():
                 print("Skip evaluation simulation because testing mode is active")
                 continue
 
-            if calibrate_apache and simulation_row["Variete"] != "Apache":
-                # calibration mode active but sim_id refers to wrong cultivar
-                continue
+            if calibrate_apache:
+                if simulation_row["Variete"] != "Apache":
+                    # calibration mode active but sim_id refers to wrong cultivar
+                    continue
+            else:
+                # Bermude
+                if simulation_row["Variete"] != "Bermude":
+                    continue
 
         print("Run simulation " + str(sim_id))
         sim_parameters = None
@@ -330,6 +335,12 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
             ],
             ["while", "TempSum", ">=", tsum_55], [
                 ["Date|BBCH55", "FIRST"]
+            ],
+            ["while", "Stage", "=", 3], [
+                ["DOY|Stage3DOY", "FIRST"]
+            ],
+            ["while", "Stage", "=", 4], [
+                ["DOY|Stage4DOY", "FIRST"]
             ]
         ]
     }

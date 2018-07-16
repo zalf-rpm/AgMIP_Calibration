@@ -151,7 +151,11 @@ def write_agmip_calibration_output_file(result):
 
     start_id = 1
     if calibration:
-        start_id = 11
+        if cultivar=="Apache":
+            start_id = 11
+        else:
+            start_id = 12
+
 
 
 
@@ -165,8 +169,10 @@ def write_agmip_calibration_output_file(result):
 
     writer = csv.writer(fp, delimiter="\t")
     if int(sim_id) == start_id:
-        writer.writerow(["number", "site", "variety", "date_sowing", "simulated_date_emergence_dd/mm/yyyy",
-                     "simulated_date_BBCH30_dd/mm/yyyy", "simulated_date_BBCH55_dd/mm/yyyy"])
+        writer.writerow(["number", #"site", "variety", "date_sowing", "simulated_date_emergence_dd/mm/yyyy",
+                         #"simulated_date_BBCH30_dd/mm/yyyy", "simulated_date_BBCH55_dd/mm/yyyy",
+                         "DIFF_bbch30",
+                         "DIFF_bnbch55", "Stage3_DOY", "bbch30_DOY","bbch30_OBS_DOY", "bbch30_in_stage3", "stage4_DOY", "bbch55_DOY", "bbch55_OBS_DOY","bbch55_in_stage3"])
 
         global global_bbch30
         global_bbch30 = 0
@@ -209,7 +215,7 @@ def write_agmip_calibration_output_file(result):
     if sim_id == end_id:
         global global_bbch30
         global global_bbch55
-        writer.writerow([None, None, None, None, None, None, None, global_bbch30, global_bbch55])
+        writer.writerow([None, global_bbch30, global_bbch55])
 
     del writer
     fp.close()
@@ -233,24 +239,24 @@ def create_output_rows(sim_id, result_map, custom_id):
 
 
     row = [sim_id]
-    row.append(custom_id["site"])
-    row.append(custom_id["cultivar"])
-    row.append(custom_id["sowing_date"])
+    #row.append(custom_id["site"])
+    #row.append(custom_id["cultivar"])
+    #row.append(custom_id["sowing_date"])
 
     # date of emergence
     emerge_date = datetime.datetime.strptime(result_map["EmergeDate"], '%Y-%m-%d')
-    row.append(emerge_date.strftime("%d/%m/%Y"))
+    #row.append(emerge_date.strftime("%d/%m/%Y"))
 
     # date bbch30
     #bbch30 = datetime.datetime.strptime(result_map["BeginStage3"], '%Y-%m-%d')
     #bbch30 = bbch30 + datetime.timedelta(days=7)
     bbch30 = datetime.datetime.strptime(result_map["BBCH30"], '%Y-%m-%d')
-    row.append(bbch30.strftime("%d/%m/%Y"))
+    #row.append(bbch30.strftime("%d/%m/%Y"))
 
     #bbch55 = datetime.datetime.strptime(result_map["BeginStage4"], '%Y-%m-%d')
     #bbch55 = bbch55 - datetime.timedelta(days=7)    # 7 days before reaching stage 4
     bbch55 = datetime.datetime.strptime(result_map["BBCH55"], '%Y-%m-%d')
-    row.append(bbch55.strftime("%d/%m/%Y"))
+    #row.append(bbch55.strftime("%d/%m/%Y"))
 
     ignore_simulations = [] # 57 for apache?
     if calibration and sim_id not in ignore_simulations:
@@ -267,6 +273,20 @@ def create_output_rows(sim_id, result_map, custom_id):
 
         global_bbch30 += diff_bbch30.days
         global_bbch55 += diff_bbch55.days
+
+        stage3_doy = result_map["Stage3DOY"]
+        bbch30_doy = bbch30.timetuple().tm_yday
+        stage4_doy = result_map["Stage4DOY"]
+        bbch55_doy = bbch55.timetuple().tm_yday
+
+        row.append(stage3_doy)
+        row.append(bbch30_doy)
+        row.append(bbch30_obs.timetuple().tm_yday)
+        row.append(stage3_doy<bbch30_doy)
+        row.append(stage4_doy)
+        row.append(bbch55_doy)
+        row.append(bbch55_obs.timetuple().tm_yday)
+        row.append(bbch55_doy<stage4_doy)
 
 
 

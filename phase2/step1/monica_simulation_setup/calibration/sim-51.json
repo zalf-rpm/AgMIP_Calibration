@@ -94,6 +94,30 @@
                     "Date|BBCH55", 
                     "FIRST"
                 ]
+            ], 
+            [
+                "while", 
+                "Stage", 
+                "=", 
+                3
+            ], 
+            [
+                [
+                    "DOY|Stage3DOY", 
+                    "FIRST"
+                ]
+            ], 
+            [
+                "while", 
+                "Stage", 
+                "=", 
+                4
+            ], 
+            [
+                [
+                    "DOY|Stage4DOY", 
+                    "FIRST"
+                ]
             ]
         ]
     }, 
