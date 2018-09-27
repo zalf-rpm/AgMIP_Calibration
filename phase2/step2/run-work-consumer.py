@@ -145,11 +145,12 @@ def write_agmip_calibration_output_file(result):
 
     fp=None
 
-    # if os.path.exists(output_file):
-    #     os.remove(output_file)
-    #     fp = open(output_file, 'wb')
-    # else:
-    fp = open(output_file, 'ab')
+    if id == 1:
+        if os.path.exists(output_file):
+             os.remove(output_file)
+             fp = open(output_file, 'wb')
+    else:
+        fp = open(output_file, 'ab')
 
     writer = csv.writer(fp, delimiter="\t")
     if id == 1:
