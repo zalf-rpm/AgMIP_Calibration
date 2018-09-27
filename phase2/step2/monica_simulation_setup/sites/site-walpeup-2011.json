@@ -1,0 +1,159 @@
+{
+    "SoilTemperatureParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-temperature.json"
+    ], 
+    "SoilOrganicParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-organic.json"
+    ], 
+    "EnvironmentParameters": {
+        "LeachingDepth": 2.0, 
+        "AtmosphericCO2": 395, 
+        "=": [
+            "include-from-file", 
+            "monica_simulation_setup/monica_parameters/general/environment.json"
+        ], 
+        "WindSpeedHeight": 2.5
+    }, 
+    "SoilMoistureParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-moisture.json"
+    ], 
+    "SiteParameters": {
+        "Latitude": -35.12, 
+        "Slope": 0.01, 
+        "SoilProfileParameters": [
+            {
+                "SoilMoisturePercentFC": 128.3, 
+                "SoilNitrate": 11.32, 
+                "PermanentWiltingPoint": 0.011, 
+                "Thickness": [
+                    15.0, 
+                    "cm"
+                ], 
+                "Sand": 0.813, 
+                "Clay": 0.01, 
+                "pH": 6.6, 
+                "Silt": 0.043, 
+                "FieldCapacity": 0.053, 
+                "SoilBulkDensity": 1665.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 43.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 328.99, 
+                "SoilNitrate": 10.24, 
+                "PermanentWiltingPoint": 0.049, 
+                "Thickness": [
+                    15.0, 
+                    "cm"
+                ], 
+                "Sand": 0.76, 
+                "Clay": 0.01, 
+                "pH": 8.4, 
+                "Silt": 0.05, 
+                "FieldCapacity": 0.069, 
+                "SoilBulkDensity": 1796.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 36.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 110.81, 
+                "SoilNitrate": 7.33, 
+                "PermanentWiltingPoint": 0.119, 
+                "Thickness": [
+                    30.0, 
+                    "cm"
+                ], 
+                "Sand": 0.573, 
+                "Clay": 0.203, 
+                "pH": 9.4, 
+                "Silt": 0.063, 
+                "FieldCapacity": 0.222, 
+                "SoilBulkDensity": 1466.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 47.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 116.02, 
+                "SoilNitrate": 5.68, 
+                "PermanentWiltingPoint": 0.119, 
+                "Thickness": [
+                    30.0, 
+                    "cm"
+                ], 
+                "Sand": 0.573, 
+                "Clay": 0.203, 
+                "pH": 9.8, 
+                "Silt": 0.063, 
+                "FieldCapacity": 0.231, 
+                "SoilBulkDensity": 1577.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 30.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 136.53, 
+                "SoilNitrate": 10.07, 
+                "PermanentWiltingPoint": 0.119, 
+                "Thickness": [
+                    30.0, 
+                    "cm"
+                ], 
+                "Sand": 0.573, 
+                "Clay": 0.203, 
+                "pH": 10.0, 
+                "Silt": 0.063, 
+                "FieldCapacity": 0.219, 
+                "SoilBulkDensity": 1678.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 35.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 131.51, 
+                "SoilNitrate": 21.59, 
+                "PermanentWiltingPoint": 0.119, 
+                "Thickness": [
+                    30.0, 
+                    "cm"
+                ], 
+                "Sand": 0.573, 
+                "Clay": 0.203, 
+                "pH": 10.0, 
+                "Silt": 0.063, 
+                "FieldCapacity": 0.219, 
+                "SoilBulkDensity": 1687.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 6.0
+            }, 
+            {
+                "SoilMoisturePercentFC": 123.87, 
+                "SoilNitrate": 29.86, 
+                "PermanentWiltingPoint": 0.119, 
+                "Thickness": [
+                    30.0, 
+                    "cm"
+                ], 
+                "Sand": 0.573, 
+                "Clay": 0.203, 
+                "pH": 10.0, 
+                "Silt": 0.063, 
+                "FieldCapacity": 0.222, 
+                "SoilBulkDensity": 1706.0, 
+                "Sceleton": 0.0, 
+                "SoilOrganicCarbon": 6.0
+            }
+        ], 
+        "NDeposition": [
+            30, 
+            "kg N ha-1 y-1"
+        ], 
+        "HeightNN": [
+            0.0
+        ]
+    }, 
+    "SoilTransportParameters": [
+        "include-from-file", 
+        "monica_simulation_setup/monica_parameters/general/soil-transport.json"
+    ]
+}

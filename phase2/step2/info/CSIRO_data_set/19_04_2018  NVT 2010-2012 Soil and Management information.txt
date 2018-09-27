@@ -1,0 +1,156 @@
+Bungunya 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	10/05/2012	06/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS2	22/05/2012	06/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS3	23/06/2012	06/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Corrigin 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	15/05/2010	24/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"	"14/08/2010: 32.2 kg/ha urea-N, depth 0mm"										
+TOS2	26/05/2010	24/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"	"14/08/2010: 32.2 kg/ha urea-N, depth 0mm"										
+TOS3	22/06/2010	24/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"	"14/08/2010: 32.2 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Corrigin 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	30/04/2011	10/12/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"											
+TOS2	24/05/2011	10/12/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"											
+TOS3	21/06/2011	10/12/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Corrigin 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	02/05/2012	22/11/2012	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"25/07/2012: 23 kg/ha urea-N, depth 0mm"										
+TOS2	21/05/2012	22/11/2012	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"25/07/2012: 23 kg/ha urea-N, depth 0mm"										
+TOS3	21/06/2012	22/11/2012	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"25/07/2012: 23 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Eradu 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	14/05/2010	09/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"											
+TOS2	27/05/2010	09/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"											
+TOS3	22/06/2010	09/11/2010	100	220	20	"46 kg/ha urea-N, depth 50mm                                     13.4 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Eradu 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	29/04/2011	14/11/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"28/07/2011: 69 kg/ha urea-N, depth 0mm"										
+TOS2	24/05/2011	14/11/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"28/07/2011: 69 kg/ha urea-N, depth 0mm"										
+TOS3	23/06/2011	14/11/2011	100	220	25	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"28/07/2011: 69 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Eradu 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	02/05/2012	23/11/2012	100	220	30	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"01/08/2012: 55.2 kg/ha urea-N, depth 0mm"										
+TOS2	21/05/2012	23/11/2012	100	220	30	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"01/08/2012: 55.2 kg/ha urea-N, depth 0mm"										
+TOS3	21/06/2012	23/11/2012	100	220	30	"46 kg/ha urea-N, depth 50mm                                     10 kg/ha NH4-N, depth 50mm"	"01/08/2012: 55.2 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Lake Bolac 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	03/05/2010	29/01/2011	100	181	30	"11 kg/ha NH4-N, depth 50mm"	"07/09/2010: 32.2 kg/ha urea-N, depth 0mm     23/09/2010: 32.2 kg/ha urea-N, depth 0mm     "										
+TOS2	19/05/2010	29/01/2011	100	181	30	"11 kg/ha NH4-N, depth 50mm"	"07/09/2010: 32.2 kg/ha urea-N, depth 0mm     23/09/2010: 32.2 kg/ha urea-N, depth 0mm     "										
+TOS3	08/07/2010	29/01/2011	100	181	30	"11 kg/ha NH4-N, depth 50mm"	"07/09/2010: 23 kg/ha urea-N, depth 0mm     11/10/2010: 32.2 kg/ha urea-N, depth 0mm     "										
+																	
+																	
+Lake Bolac 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	09/05/2011	11/12/2011	100	200	30	"11 kg/ha NH4-N, depth 50mm"	"30/08/2011: 92 kg/ha urea-N, depth 0mm"										
+TOS2	03/06/2011	11/12/2011	100	200	30	"11 kg/ha NH4-N, depth 50mm"	"30/08/2011: 92 kg/ha urea-N, depth 0mm"										
+TOS3	16/06/2011	11/12/2011	100	200	30	"11 kg/ha NH4-N, depth 50mm"	"30/08/2011: 92 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Goondiwindi 2011																	
+"Site was flooded 2011, no harvest data"																	
+																	
+																	
+Minnipa 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	30/04/2010	17/12/2010	100	180	30	"9 kg/ha NH4-N, depth 50mm"	"17/08/2010: 23 kg/ha urea-N, depth 0mm"										
+TOS2	31/05/2010	17/12/2010	100	180	30	"9 kg/ha NH4-N, depth 50mm"	"17/08/2010: 23 kg/ha urea-N, depth 0mm"										
+TOS3	24/06/2010	17/12/2010	100	180	30	"9 kg/ha NH4-N, depth 50mm"	"13/09/2010: 23 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Minnipa 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	13/05/2011	07/11/2011	100	250	30	"11.2 kg/ha NH4-N, depth 50mm"											
+TOS2	27/05/2011	07/11/2011	100	250	30	"11.2 kg/ha NH4-N, depth 50mm"											
+TOS3	24/06/2011	08/11/2011	100	250	30	"11.2 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Minnipa 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	25/05/2012	26/11/2012	100	250	30	"10.8 kg/ha NH4-N, depth 50mm"	"25/06/2012: 24.8 kg/ha urea-N, depth 0mm     14/08/2012: 24.8 kg/ha urea-N, depth 0mm"										
+TOS2	08/06/2012	26/11/2012	100	250	30	"10.8 kg/ha NH4-N, depth 50mm"	"25/06/2012: 24.8 kg/ha urea-N, depth 0mm     14/08/2012: 24.8 kg/ha urea-N, depth 0mm"										
+TOS3	25/06/2012	26/11/2012	100	250	30	"10.8 kg/ha NH4-N, depth 50mm                24.8 kg/ha urea-N, depth 0mm                                     "											
+																	
+																	
+Nangwee 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	17/05/2012	07/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS2	31/05/2012	07/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS3	23/06/2012	22/11/2012	120	260	30	"9 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Spring Ridge 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	10/05/2010	17/12/2010	100	305	30	"46 kg/ha urea-N, depth 50mm                                     10.1 kg/ha NH4-N, depth 50mm"	"03/09/2010: 92 kg/ha urea-N, depth 0mm"										
+TOS2	11/06/2010	17/12/2010	100	305	30	"46 kg/ha urea-N, depth 50mm                                     10.1 kg/ha NH4-N, depth 50mm"	"03/09/2010: 92 kg/ha urea-N, depth 0mm"										
+TOS3	01/07/2010	17/12/2010	100	305	30	"46 kg/ha urea-N, depth 50mm                                     10.1 kg/ha NH4-N, depth 50mm"	"03/09/2010: 92 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Spring Ridge 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	09/05/2011	21/11/2011	120	305	30	"8.8 kg/ha NH4-N, depth 50mm"	"26/08/2011: 92 kg/ha urea-N, depth 0mm"										
+TOS2	06/06/2011	21/11/2011	120	305	30	"8.8 kg/ha NH4-N, depth 50mm"	"26/08/2011: 92 kg/ha urea-N, depth 0mm"										
+TOS3	23/06/2011	21/11/2011	120	305	30	"8.8 kg/ha NH4-N, depth 50mm"	"26/08/2011: 92 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Temora 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	05/05/2011	02/12/2011	100	180	30	"11 kg/ha NH4-N, depth 50mm"	"15/08/2011: 46 kg/ha urea-N, depth 0mm"										
+TOS2	26/05/2011	02/12/2011	100	180	30	"11 kg/ha NH4-N, depth 50mm"	"15/08/2011: 46 kg/ha urea-N, depth 0mm"										
+TOS3	20/06/2011	02/12/2011	100	180	30	"11 kg/ha NH4-N, depth 50mm"	"27/09/2011: 46 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Temora 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	05/05/2012	12/11/2012	100	180	25	"11 kg/ha NH4-N, depth 50mm"	"04/09/2012: 23 kg/ha urea-N, depth 0mm     06/09/2012: 50.6 kg/ha urea-N, depth 0mm"										
+TOS2	23/05/2012	12/11/2012	100	180	35	"11 kg/ha NH4-N, depth 50mm"	"04/09/2012: 23 kg/ha urea-N, depth 0mm     06/09/2012: 50.6 kg/ha urea-N, depth 0mm"										
+TOS3	25/06/2012	12/11/2012	100	180	35	"11 kg/ha NH4-N, depth 50mm"	"06/09/2012: 50.6 kg/ha urea-N, depth 0mm     27/09/2012: 23 kg/ha urea-N, depth 0mm"										
+																	
+																	
+Turretfield 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	18/05/2011	15/12/2011	100	180	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS2	08/06/2011	15/12/2011	100	180	30	"9 kg/ha NH4-N, depth 50mm"											
+TOS3	28/06/2011	15/12/2011	100	180	30	"9 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Turretfield 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	30/05/2012	16/11/2012	100	229	30	"17.1 kg/ha NH4-N, depth 50mm"	"31/08/2012: 50 kg/ha NH4-N, depth 0mm"										
+TOS2	15/06/2012	10/12/2012	100	229	30	"17.1 kg/ha NH4-N, depth 50mm"	"10/09/2012: 50 kg/ha NH4-N, depth 0mm"										
+TOS3	05/07/2012	10/12/2012	100	229	30	"17.1 kg/ha NH4-N, depth 50mm"	"21/09/2012: 50 kg/ha NH4-N, depth 0mm"										
+																	
+																	
+Walpeup 2010																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	30/04/2010	16/11/2010	100	250	30	"8.7 kg/ha NH4-N, depth 50mm"											
+TOS2	24/05/2010	22/11/2010	100	250	30	"8.7 kg/ha NH4-N, depth 50mm"											
+TOS3	28/06/2010	02/12/2010	100	250	30	"8.7 kg/ha NH4-N, depth 50mm"											
+																	
+																	
+Walpeup 2011																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	29/04/2011	07/11/2011	100	250	30	"9.8 kg/ha NH4-N, depth 50mm"	"01/08/2011: 25.2 kg/ha NH4-N, depth 0mm"										
+TOS2	31/05/2011	28/11/2011	100	250	30	"9.8 kg/ha NH4-N, depth 50mm"	"01/08/2011: 25.2 kg/ha NH4-N, depth 0mm"										
+TOS3	01/07/2011	28/11/2011	100	250	30	"9.8 kg/ha NH4-N, depth 50mm"	"29/08/2011: 25.2 kg/ha NH4-N, depth 0mm"										
+																	
+																	
+Walpeup 2012																	
+Time of Sowing	Sowing date	Harvest date	Plants (/m2)	Row spacing (mm)	Sowing depth (mm)	N Fertiliser applied at sowing	Additional N Fertiliser										
+TOS1	27/04/2012	13/11/2012	100	250	30	"12.6 kg/ha NH4-N, depth 50mm"	"29/08/2012: 31.5 kg/ha NH4-N, depth 0mm"										
+TOS2	04/06/2012	22/11/2012	100	250	30	"12.6 kg/ha NH4-N, depth 50mm"	"29/08/2012: 31.5 kg/ha NH4-N, depth 0mm"										
+TOS3	18/07/2012	22/11/2012	100	250	30	"12.6 kg/ha NH4-N, depth 50mm"	"01/10/2012: 31.5 kg/ha NH4-N, depth 0mm"										
