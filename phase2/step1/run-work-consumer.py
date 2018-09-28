@@ -98,7 +98,7 @@ def run_consumer():
 
 
             custom_id = result["customId"]
-            output_file = custom_id["sim_dir"] + custom_id["output_filename"]
+            output_file = custom_id["sim_files"] + custom_id["output_filename"]
             print(result)
 
             print("Write output file:", output_file)
@@ -142,7 +142,7 @@ def write_agmip_calibration_output_file(result):
 
     custom_id = result["customId"]
     sim_id = custom_id["id"]
-    output_file = custom_id["sim_dir"] + custom_id["output_filename"]
+    output_file = custom_id["sim_files"] + custom_id["output_filename"]
     bbch_30_observed = custom_id["bbch30"]
     bbch_55_observed = custom_id["bbch55"]
     cultivar = custom_id["cultivar"]
@@ -169,10 +169,11 @@ def write_agmip_calibration_output_file(result):
 
     writer = csv.writer(fp, delimiter="\t")
     if int(sim_id) == start_id:
-        writer.writerow(["number", #"site", "variety", "date_sowing", "simulated_date_emergence_dd/mm/yyyy",
-                         #"simulated_date_BBCH30_dd/mm/yyyy", "simulated_date_BBCH55_dd/mm/yyyy",
-                         "DIFF_bbch30",
-                         "DIFF_bnbch55", "Stage3_DOY", "bbch30_DOY","bbch30_OBS_DOY", "bbch30_in_stage3", "stage4_DOY", "bbch55_DOY", "bbch55_OBS_DOY","bbch55_in_stage3"])
+        writer.writerow(["number", "site", "variety", "date_sowing", "simulated_date_emergence_dd/mm/yyyy",
+                         "simulated_date_BBCH30_dd/mm/yyyy", "simulated_date_BBCH55_dd/mm/yyyy"                 #,
+                         # "DIFF_bbch30",
+                         # "DIFF_bnbch55", "Stage3_DOY", "bbch30_DOY","bbch30_OBS_DOY", "bbch30_in_stage3", "stage4_DOY", "bbch55_DOY", "bbch55_OBS_DOY","bbch55_in_stage3"
+                        ])
 
         global global_bbch30
         global_bbch30 = 0
@@ -212,10 +213,10 @@ def write_agmip_calibration_output_file(result):
 
     end_id = 70
 
-    if sim_id == end_id:
-        global global_bbch30
-        global global_bbch55
-        writer.writerow([None, global_bbch30, global_bbch55])
+    # if sim_id == end_id:
+    #     global global_bbch30
+    #     global global_bbch55
+    #     writer.writerow([None, global_bbch30, global_bbch55])
 
     del writer
     fp.close()
@@ -239,24 +240,21 @@ def create_output_rows(sim_id, result_map, custom_id):
 
 
     row = [sim_id]
-    #row.append(custom_id["site"])
-    #row.append(custom_id["cultivar"])
-    #row.append(custom_id["sowing_date"])
+    row.append(custom_id["site"])
+    row.append(custom_id["cultivar"])
+    row.append(custom_id["sowing_date"])
 
     # date of emergence
     emerge_date = datetime.datetime.strptime(result_map["EmergeDate"], '%Y-%m-%d')
-    #row.append(emerge_date.strftime("%d/%m/%Y"))
+    row.append(emerge_date.strftime("%d/%m/%Y"))
 
     # date bbch30
-    #bbch30 = datetime.datetime.strptime(result_map["BeginStage3"], '%Y-%m-%d')
-    #bbch30 = bbch30 + datetime.timedelta(days=7)
     bbch30 = datetime.datetime.strptime(result_map["BBCH30"], '%Y-%m-%d')
-    #row.append(bbch30.strftime("%d/%m/%Y"))
+    row.append(bbch30.strftime("%d/%m/%Y"))
 
-    #bbch55 = datetime.datetime.strptime(result_map["BeginStage4"], '%Y-%m-%d')
-    #bbch55 = bbch55 - datetime.timedelta(days=7)    # 7 days before reaching stage 4
+
     bbch55 = datetime.datetime.strptime(result_map["BBCH55"], '%Y-%m-%d')
-    #row.append(bbch55.strftime("%d/%m/%Y"))
+    row.append(bbch55.strftime("%d/%m/%Y"))
 
     ignore_simulations = [] # 57 for apache?
     if calibration and sim_id not in ignore_simulations:

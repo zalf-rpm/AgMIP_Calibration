@@ -36,7 +36,17 @@
                         25.0, 
                         "mm"
                     ], 
-                    "type": "Irrigation"
+                    "type": "Irrigation", 
+                    "parameters": {
+                        "sulfateConcentration": [
+                            0.0, 
+                            "mg dm-3"
+                        ], 
+                        "nitrateConcentration": [
+                            0.0, 
+                            "mg dm-3"
+                        ]
+                    }
                 }, 
                 {
                     "date": "2014-02-19", 

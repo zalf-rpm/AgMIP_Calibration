@@ -14,7 +14,7 @@ for f in files:
     with open(os.path.join(basepath, f)) as _:
         sim = json.load(_)
     
-    sim["climate.csv"] = ""
+    sim["climate_files.csv"] = ""
     sim["include-file-base-path"] = "C:/Users/stella/Documents/GitHub/"
     sim["output"]["events"] = []
 

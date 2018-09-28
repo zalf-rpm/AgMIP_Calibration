@@ -95,7 +95,7 @@ def run_consumer():
 
 
             custom_id = result["customId"]
-            output_file = custom_id["sim_files"] + custom_id["output_filename"]
+            output_file = custom_id["output_dir"] + custom_id["output_filename"]
             print(result)
 
             print("Write output file:", output_file)
@@ -141,7 +141,7 @@ def write_agmip_calibration_output_file(result):
 
     id = custom_id["id"]
 
-    output_file = custom_id["sim_files"] + custom_id["output_filename"]
+    output_file = custom_id["output_dir"] + custom_id["output_filename"]
 
     fp=None
 

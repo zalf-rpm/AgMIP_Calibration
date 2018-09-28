@@ -98,6 +98,5 @@
         ]
     }, 
     "NitrogenResponseOn": true, 
-    "include-file-base-path": "./", 
     "end-date": "2010-12-31"
 }

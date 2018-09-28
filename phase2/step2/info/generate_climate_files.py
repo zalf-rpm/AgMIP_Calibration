@@ -54,8 +54,8 @@ def generate_monica_climate_csv_files():
         with open(input_dir + "/" + filename, "r") as csv_file:
             with open(output_dir + filename, "wb") as output_file:
 
-                csv_out = csv.writer(output_file, delimiter=",")
-                csv_out.writerow(["iso-date", "tmin", "tmax", "tavg", "globrad", "precip", "et0"])
+                csv_out = csv.writer(output_file, delimiter=" ")
+                csv_out.writerow(["iso-date", "tmin", "tmax", "tavg", "globrad", "precip", "et0", "wind"])
                 print filename, "---------------------------------------"
 
                 is_data_row = False
@@ -81,8 +81,9 @@ def generate_monica_climate_csv_files():
                         precip = round(float(data_row[col['rain']]), 3)
                         pan = round(float(data_row[col['pan']]), 3)
                         et0 = pan * 0.7
+                        wind=0.0
 
-                        csv_out.writerow([date, tmin, tmax, tavg, globrad, precip, et0])
+                        csv_out.writerow([date, tmin, tmax, tavg, globrad, precip, et0, wind])
 
 
 #############################################################

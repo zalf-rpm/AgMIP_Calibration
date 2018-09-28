@@ -36,7 +36,7 @@ class monica_adapter(object):
                 sim = json.load(simfile)
                 sim["crop.json"] = exp_map["crop_file"]
                 sim["site.json"] = exp_map["site_file"]
-                #sim["climate.csv"] = exp_map["climate_file"]
+                #sim["climate_files.csv"] = exp_map["climate_file"]
 
             with open(exp_map["site_file"]) as sitefile:
                 site = json.load(sitefile)
@@ -51,13 +51,13 @@ class monica_adapter(object):
                 "crop": crop,
                 "site": site,
                 "sim": sim,
-                "climate": ""
+                "climate_files": ""
             })
             
-            #climate is read by the server
-            env["csvViaHeaderOptions"] = sim["climate.csv-options"]
-            env["csvViaHeaderOptions"]["start-date"] = sim["climate.csv-options"]["start-date"]
-            env["csvViaHeaderOptions"]["end-date"] = sim["climate.csv-options"]["end-date"]
+            #climate_files is read by the server
+            env["csvViaHeaderOptions"] = sim["climate_files.csv-options"]
+            env["csvViaHeaderOptions"]["start-date"] = sim["climate_files.csv-options"]["start-date"]
+            env["csvViaHeaderOptions"]["end-date"] = sim["climate_files.csv-options"]["end-date"]
             env["pathToClimateCSV"] = []
             env["pathToClimateCSV"].append(exp_map["climate_file"])
 

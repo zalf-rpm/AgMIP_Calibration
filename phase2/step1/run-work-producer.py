@@ -46,7 +46,7 @@ def run_producer():
     create_simulation_files = False
 
     # calibration options
-    training_mode = True
+    training_mode = False
     calibrate_apache = False
 
     # simulation options
@@ -56,15 +56,6 @@ def run_producer():
 
     # calibration -------------------------------------
     # original "StageTemperatureSum": [[148, 284, 380, 180, 420, 25 ], "\u00b0C d"]
-    stage1_sum = 148
-    stage2_sum = 100 # 340
-    stage3_sum = 670 # 407
-    # ------------------------------------------------
-
-    # based on Christian Kersebaums assumptions
-
-    tsum_bbch55 = (stage2_sum + stage3_sum) - 180
-    tsum_bbch30 = (stage3_sum - 180) * 0.25 + stage2_sum
 
     # overwrite some settings if creation of simulation files is active
     if create_simulation_files:
@@ -101,9 +92,6 @@ def run_producer():
         simulation_row = environment[1]
         sim_id = int(simulation_row["n"])
 
-        # just for test runs stop after sending one element
-        # if sent_id == 1 and create_simulation_files == False:
-        # break
 
         if training_mode:
             # calibration mode
@@ -119,6 +107,23 @@ def run_producer():
                 # Bermude
                 if simulation_row["Variete"] != "Bermude":
                     continue
+
+        # apache parameters
+        stage1_sum = 148
+        stage2_sum = 101 # 340
+        stage3_sum = 429 # 407
+
+        if simulation_row["Variete"] == "Bermude":
+            stage1_sum = 148
+            stage2_sum = 83  # 340
+            stage3_sum = 477  # 407
+
+        # ------------------------------------------------
+
+        # based on Christian Kersebaums assumptions
+
+        tsum_bbch55 = (stage2_sum + stage3_sum)
+        tsum_bbch30 = (stage3_sum) * 0.25 + stage2_sum
 
         print("Run simulation " + str(sim_id))
         sim_parameters = None
@@ -200,7 +205,7 @@ def run_producer():
         env["customId"] = {
             "id": sim_id,
             "calibration": training_mode,
-            "sim_dir": output_dir,
+            "sim_files": output_dir,
             "output_filename": output_filename,
             "cultivar": simulation_row["Variete"],
             "sowing_date": simulation_row["Date_Semis"],
@@ -252,10 +257,10 @@ def initialise_sockets(config):
 
 def get_climate_information():
 
-    """ Setups static information about climate files of the study. """
+    """ Setups static information about climate_files files of the study. """
     #
     climate_csv_config = {
-        "no-of-climate-file-header-lines": 1,
+        "no-of-climate_files-file-header-lines": 1,
         "csv-separator": ",",
         "header-to-acd-names": {
             "et0": "et0"
@@ -357,16 +362,16 @@ def create_sim_parameters(mgt_row, include_path, sim_id, output_dir, activate_de
     sim_parameters["UseAutomaticIrrigation"] = False
     sim_parameters["UseNMinMineralFertilisingMethod"] = False
 
-    # climate file setup
+    # climate_files file setup
     elevation = str(mgt_row["Altitude"])
     climate_csv_config, climate_file_map = get_climate_information()
 
-    sim_parameters["climate.csv-options"] = climate_csv_config
-    sim_parameters["climate.csv-options"]["start-date"] = sim_parameters["start-date"]
-    sim_parameters["climate.csv-options"]["end-date"] = sim_parameters["end-date"]
+    sim_parameters["climate_files.csv-options"] = climate_csv_config
+    sim_parameters["climate_files.csv-options"]["start-date"] = sim_parameters["start-date"]
+    sim_parameters["climate_files.csv-options"]["end-date"] = sim_parameters["end-date"]
 
-    climate_path = include_path + "monica_simulation_setup/input_data/climate/" + climate_file_map[elevation]
-    sim_parameters["climate.csv"] = climate_path
+    climate_path = include_path + "monica_simulation_setup/input_data/climate_files/" + climate_file_map[elevation]
+    sim_parameters["climate_files.csv"] = climate_path
     sim_parameters["include-file-base-path"] = include_path
 
     return sim_parameters
@@ -407,7 +412,15 @@ def create_crop_parameters(mgt_row):
     for event in range(1, number_of_irrigation_events + 1):
         date = get_monica_date_string(mgt_row["Date_" + str(event) + "_Irrigation"])
         dose = float(mgt_row["Dose_" + str(event) + "_Irrigation"])
-        irrigation_step = {"date": date, "type": "Irrigation", "amount": [dose, "mm"]}
+        irrigation_step = {
+            "date": date,
+            "type": "Irrigation",
+            "amount": [dose, "mm"],
+            "parameters": {
+                "nitrateConcentration": [0.0, "mg dm-3"],
+                "sulfateConcentration": [0.0, "mg dm-3"]
+            }
+        }
         workstep_list.append(irrigation_step)
 
     # fertilization steps -------------------------

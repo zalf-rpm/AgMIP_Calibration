@@ -153,7 +153,7 @@ def create_sim_parameters(mgt_row, include_path, sim_id, calibration_mode):
     elevation = "0.0"
     climate_csv_config = {
         "no-of-climate_files-file-header-lines": 1,
-        "csv-separator": ",",
+        "csv-separator": " ",
         "header-to-acd-names": {
             "et0": "et0"
         }
@@ -162,10 +162,10 @@ def create_sim_parameters(mgt_row, include_path, sim_id, calibration_mode):
     sim_parameters["climate_files.csv-options"] = climate_csv_config
     sim_parameters["climate_files.csv-options"]["start-date"] = sim_parameters["start-date"]
     sim_parameters["climate_files.csv-options"]["end-date"] = sim_parameters["end-date"]
-
-    climate_path = "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step2/" + "monica_simulation_setup/climate/" + mgt_row["climate_file"]
+    # +
+    climate_path = "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step2/monica_simulation_setup/climate/" + mgt_row["climate_file"]
     sim_parameters["climate_files.csv"] = climate_path
-    sim_parameters["include-file-base-path"] = "./"
+    #sim_parameters["include-file-base-path"] = "./"
 
     return sim_parameters
 
