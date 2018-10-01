@@ -49,7 +49,7 @@ def run_producer():
     # simulation options
     activate_debug = False
 
-    output_dir = "runs/2018-09-27/"
+    output_dir = "runs/2018-10-01/"
 
     # calibration -------------------------------------
 
@@ -112,6 +112,43 @@ def run_producer():
         #site_parameters["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
         sim_parameters["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
 
+        # spring wheat parameters for stage temperature sum
+        stage2_sum = 284
+        stage3_sum = 280
+        tsum_bbch30 = (stage3_sum) * 0.25 + stage2_sum
+
+        output_map = {
+
+            "events": [
+                "anthesis", [
+                    "Date|Ant"
+                ],
+                "maturity", [
+                    "Date|Mat",
+                ],
+                ["while", "Stage", "=", 2], [
+                    ["Date|EmergeDate", "FIRST"]
+                ],
+                ["while", "Stage", "=", 3], [
+                    ["Date|BeginStage3", "FIRST"]
+                ],
+                ["while", "Stage", "=", 4], [
+                    ["Date|BeginStage4", "FIRST"]
+                ],
+                ["while", "Stage", "=", 5], [
+                    ["Date|BeginStage5", "FIRST"]
+                ],
+                ["while", "Stage", "=", 6], [
+                    ["Date|BeginStage6", "FIRST"]
+                ],
+                ["while", "TempSum", ">=", tsum_bbch30], [
+                    ["Date|BBCH30", "FIRST"]
+                ],
+            ]
+        }
+
+        sim_parameters["output"] = output_map
+
         crop_file = sim_parameters["crop.json"]
         with open(crop_file) as fp:
             crop_parameters = json.load(fp)
@@ -120,15 +157,15 @@ def run_producer():
             "crop": crop_parameters,
             "site": site_parameters,
             "sim": sim_parameters,
-            "climate_files": ""
+            "climate": ""
         }
 
         env = monica_io.create_env_json_from_json_config(env_map)
 
-        env["csvViaHeaderOptions"] = sim_parameters["climate_files.csv-options"]
-        env["csvViaHeaderOptions"]["start-date"] = sim_parameters["climate_files.csv-options"]["start-date"]
-        env["csvViaHeaderOptions"]["end-date"] = sim_parameters["climate_files.csv-options"]["end-date"]
-        env["pathToClimateCSV"] = sim_parameters["climate_files.csv"]
+        env["csvViaHeaderOptions"] = sim_parameters["climate.csv-options"]
+        env["csvViaHeaderOptions"]["start-date"] = sim_parameters["climate.csv-options"]["start-date"]
+        env["csvViaHeaderOptions"]["end-date"] = sim_parameters["climate.csv-options"]["end-date"]
+        env["pathToClimateCSV"] = sim_parameters["climate.csv"]
 
 
         # final env object with all necessary information
@@ -151,8 +188,7 @@ def run_producer():
         socket.send_json(env)
         sent_id += 1
 
-
-        break
+        # break
 
     stop_send = time.clock()
 

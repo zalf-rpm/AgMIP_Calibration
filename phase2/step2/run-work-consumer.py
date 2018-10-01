@@ -148,7 +148,7 @@ def write_agmip_calibration_output_file(result):
     if id == 1:
         if os.path.exists(output_file):
              os.remove(output_file)
-             fp = open(output_file, 'wb')
+        fp = open(output_file, 'wb')
     else:
         fp = open(output_file, 'ab')
 
@@ -208,6 +208,7 @@ def create_output_rows(sim_id, result_map, custom_id):
 
     """ Creates array with output rows in the required AgMIP output style. """
 
+    print "RESULT: ", result_map
     calibration_mode = custom_id["calibration"]
     sowing_day = custom_id["sowing_day"]
     site_name = custom_id["site_name"]
@@ -216,56 +217,24 @@ def create_output_rows(sim_id, result_map, custom_id):
     row = [year, site_name, sowing_day]
 
     # date of emergence
-    # emerge_date = datetime.datetime.strptime(result_map["EmergeDate"], '%Y-%m-%d')
-    # row.append(emerge_date.strftime("%d/%m/%Y"))
+    emerge_date = datetime.datetime.strptime(result_map["EmergeDate"], '%Y-%m-%d')
+    row.append(emerge_date.strftime("%d/%m/%Y"))
 
     # date bbch30
-    # bbch30 = datetime.datetime.strptime(result_map["BBCH30"], '%Y-%m-%d')
-    # row.append(bbch30.strftime("%d/%m/%Y"))
-    #
-    #
-    # bbch55 = datetime.datetime.strptime(result_map["BBCH55"], '%Y-%m-%d')
-    # row.append(bbch55.strftime("%d/%m/%Y"))
-    #
-    # ignore_simulations = [] # 57 for apache?
-    # if calibration and sim_id not in ignore_simulations:
-    #
-    #     bbch30_obs = datetime.datetime.strptime(bbch_30_observed, '%d/%m/%Y')
-    #     bbch55_obs = datetime.datetime.strptime(bbch_55_observed, '%d/%m/%Y')
-    #     diff_bbch30 = bbch30_obs - bbch30
-    #     diff_bbch55 = bbch55_obs - bbch55
-    #     row.append(diff_bbch30.days)
-    #     row.append(diff_bbch55.days)
-    #
-    #     global global_bbch30
-    #     global global_bbch55
-    #
-    #     global_bbch30 += diff_bbch30.days
-    #     global_bbch55 += diff_bbch55.days
-    #
-    #     stage3_doy = result_map["Stage3DOY"]
-    #     bbch30_doy = bbch30.timetuple().tm_yday
-    #     stage4_doy = result_map["Stage4DOY"]
-    #     bbch55_doy = bbch55.timetuple().tm_yday
-    #
-    #     row.append(stage3_doy)
-    #     row.append(bbch30_doy)
-    #     row.append(bbch30_obs.timetuple().tm_yday)
-    #     row.append(stage3_doy<bbch30_doy)
-    #     row.append(stage4_doy)
-    #     row.append(bbch55_doy)
-    #     row.append(bbch55_obs.timetuple().tm_yday)
-    #     row.append(bbch55_doy<stage4_doy)
+    zadok30 = datetime.datetime.strptime(result_map["BBCH30"], '%Y-%m-%d')
+    row.append(zadok30.strftime("%d/%m/%Y"))
 
+    begin_stage4 = datetime.datetime.strptime(result_map["BeginStage4"], '%Y-%m-%d')    # Flowering to grain filling
+    begin_stage5 = datetime.datetime.strptime(result_map["BeginStage5"], '%Y-%m-%d')    # Grain filling
 
+    zadok65 = begin_stage4 + ((begin_stage5 - begin_stage4) / 2)
+    row.append(zadok65.strftime("%d/%m/%Y"))
 
-    # anthesis_date
-    #ant_date = datetime.datetime.strptime(result_map["Ant"], '%Y-%m-%d')
-    #row.append(ant_date.strftime("%d/%m/%Y"))
-
-    # maturity_date
-    #mat_date = datetime.datetime.strptime(result_map["Mat"], '%Y-%m-%d')
-    #row.append(mat_date.strftime("%d/%m/%Y"))
+    if "BeginStage6" in result_map:
+        zadok90 = datetime.datetime.strptime(result_map["BeginStage6"], '%Y-%m-%d')    # Grain filling
+        row.append(zadok90.strftime("%d/%m/%Y"))
+    else:
+        row.append("NA")
 
     return row
 

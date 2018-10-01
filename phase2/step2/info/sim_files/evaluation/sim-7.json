@@ -1,14 +1,6 @@
 {
     "UseAutomaticIrrigation": false, 
-    "climate_files.csv-options": {
-        "start-date": "2011-01-01", 
-        "end-date": "2011-12-31", 
-        "no-of-climate_files-file-header-lines": 1, 
-        "header-to-acd-names": {
-            "et0": "et0"
-        }, 
-        "csv-separator": " "
-    }, 
+    "climate.csv": "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step2/monica_simulation_setup/climate/Corrigin2011.met", 
     "site.json": "./monica_simulation_setup/sites/site-corrigin-2011.json", 
     "start-date": "2011-01-01", 
     "EmergenceFloodingControlOn": false, 
@@ -18,9 +10,17 @@
     "debug?": true, 
     "crop.json": "./monica_simulation_setup/evaluation/crop-7.json", 
     "WaterDeficitResponseOn": true, 
+    "climate.csv-options": {
+        "end-date": "2011-12-31", 
+        "csv-separator": " ", 
+        "header-to-acd-names": {
+            "et0": "et0"
+        }, 
+        "no-of-climate-file-header-lines": 1, 
+        "start-date": "2011-01-01"
+    }, 
     "use-leap-years": true, 
     "UseSecondaryYields": true, 
-    "climate_files.csv": "D:/Eigene Dateien specka/ZALF/devel/github/AgMIP_CALIBRATION/phase2/step2/monica_simulation_setup/climate/Corrigin2011.met", 
     "LayerThickness": [
         0.1, 
         "m"
@@ -75,11 +75,11 @@
                 "while", 
                 "Stage", 
                 "=", 
-                3
+                5
             ], 
             [
                 [
-                    "DOY|Stage3DOY", 
+                    "Date|BeginStage5", 
                     "FIRST"
                 ]
             ], 
@@ -87,11 +87,11 @@
                 "while", 
                 "Stage", 
                 "=", 
-                4
+                6
             ], 
             [
                 [
-                    "DOY|Stage4DOY", 
+                    "Date|BeginStage6", 
                     "FIRST"
                 ]
             ]
