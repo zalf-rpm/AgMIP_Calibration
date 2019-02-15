@@ -53,6 +53,8 @@ class monica_adapter(object):
                 #    json.dump(sim, out_f, indent=4)
                 sim["crop.json"] = exp_map["crop_file"]
                 sim["site.json"] = exp_map["site_file"]
+                sim["EmergenceMoistureControlOn"] = True
+                sim["EmergenceFloodingControlOn"] = True
                 #sim["climate.csv"] = exp_map["climate_file"]
 
             with open(exp_map["site_file"]) as sitefile:
