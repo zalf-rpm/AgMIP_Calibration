@@ -1,0 +1,66 @@
+{
+    "Zadok12": [
+        "iso-date", [
+            "Stage|Stage_Z12"
+        ]
+    ],
+
+    "Zadok30": [
+        {	
+            "Z30": "label to customize TSUM_30",
+            "from": "Sowing", 
+            "to": "Harvest",
+            "while": ["TempSum", ">", "TSUM_30"]
+        }, [
+            ["DOY|DOY_Z30", "FIRST"]	
+        ]
+    ],
+
+    "Zadok59": [
+        ["while", "Stage", "=", 3], [
+            ["DOY|DOY_Z59", "LAST"]
+        ]
+    ],
+
+    "Zadok60": [
+        ["while", "Stage", "=", 4], [
+            ["DOY|DOY_Z60", "FIRST"]
+        ]
+    ],
+
+    "Zadok65": [
+        {	
+            "Z65": "label to customize TSUM_65",
+            "from": "Sowing", 
+            "to": "Harvest",
+            "while": ["TempSum", ">", "TSUM_65"]
+        }, [
+            ["DOY|DOY_Z65", "FIRST"]	
+        ]
+    ],
+
+    "Zadok69": [
+        ["while", "Stage", "=", 4], [
+            ["DOY|DOY_Z69", "LAST"]
+        ]
+    ],
+
+    "Zadok70": [
+        ["while", "Stage", "=", 5], [
+            ["DOY|DOY_Z70", "FIRST"]
+        ]
+    ],
+
+    "Zadok89": [
+        ["while", "Stage", "=", 5], [
+            ["DOY|DOY_Z89", "LAST"]
+        ]
+    ],
+
+    "Zadok90": [
+        ["while", "Stage", "=", 6], [
+            ["DOY|DOY_Z90", "FIRST"]
+        ]
+    ]
+
+}

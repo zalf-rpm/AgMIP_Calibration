@@ -1,0 +1,39 @@
+{
+    "UseAutomaticIrrigation": false, 
+    "climate.csv": "", 
+    "end-date": "2011-12-31", 
+    "site.json": "", 
+    "start-date": "2011-01-01", 
+    "climate.csv-options": {
+        "header-to-acd-names": {
+            "et0": "et0"
+        }, 
+        "csv-separator": " ", 
+        "end-date": "2011-12-31", 
+        "no-of-climate-file-header-lines": 1, 
+        "start-date": "2011-01-01"
+    }, 
+    "EmergenceMoistureControlOn": false, 
+    "debug?": false, 
+    "crop.json": "", 
+    "WaterDeficitResponseOn": true, 
+    "EmergenceFloodingControlOn": false, 
+    "use-leap-years": true, 
+    "LayerThickness": [
+        0.1, 
+        "m"
+    ], 
+    "UseNMinMineralFertilisingMethod": false, 
+    "output": {
+        "csv-options": {
+            "include-header-row": true, 
+            "include-units-row": true, 
+            "csv-separator": ","
+        }, 
+        "events": []
+    }, 
+    "NitrogenResponseOn": true, 
+    "include-file-base-path": "c:\\Users\\stella\\Documents\\GitHub\\AgMIP_Calibration\\phase2\\step2\\MultiExpCalibrator_parallel", 
+    "NumberOfLayers": 20, 
+    "UseSecondaryYields": true
+}

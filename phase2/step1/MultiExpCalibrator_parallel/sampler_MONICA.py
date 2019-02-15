@@ -52,6 +52,20 @@ def produce_plot(experiments, variable, ylabel='Best model simulation', xlabel='
     text = 'A figure has been saved as ' + filename
     print(text)
 
+def obs_sim_csv(experiments, variable):
+    with open('obs_sim_'+ variable +'.csv', 'wb') as outcsvfile:
+        writer = csv.writer(outcsvfile) 
+        header = ["experiment", "obs", "sim"]
+        writer.writerow(header)
+        for exp in experiments.keys():
+            for i in range(len(experiments[exp]["obs"])):
+                outrow=[]
+                outrow.append(exp)
+                outrow.append(experiments[exp]["obs"][i])
+                outrow.append(experiments[exp]["sims"][i])
+                writer.writerow(outrow)
+    print('obs_sim.csv written')
+
 cultivar = "bermude"#"apache" #"bermude"
 if cultivar == "apache":
     crop_sim_site_MAP = "crop_sim_site_MAP_apache.csv"
@@ -122,7 +136,7 @@ with open('calibratethese.csv') as paramscsv:
         params.append(p)
 
 spot_setup = spotpy_setup_MONICA.spot_setup(params, exp_maps, obslist)
-rep = 50
+rep = 10
 results = []
 
 sampler = spotpy.algorithms.sceua(spot_setup, dbname='SCEUA', dbformat='ram')
@@ -167,6 +181,7 @@ for i in range(len(obslist)):
     all_exps[expID]["sims"].append(bestmodelrun[i])
 
 produce_plot(all_exps, "BBCHdoys")
+obs_sim_csv(all_exps, "BBCHdoys")
 
 print("finished!")
 

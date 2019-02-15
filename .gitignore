@@ -4,3 +4,6 @@
 /phase2/step1/runs
 /phase2/step1/MultiExpCalibrator_parallel/*.pyc
 /phase2/step2/info/CSIRO_data_set/simulation_plan_original.xlsx
+/phase2/step2/MultiExpCalibrator_parallel/*.pyc
+/phase2/step2/MultiExpCalibrator_parallel/test_local_run
+/phase2/step2/MultiExpCalibrator_parallel/.vscode
