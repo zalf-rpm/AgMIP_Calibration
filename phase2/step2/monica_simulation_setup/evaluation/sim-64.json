@@ -6,7 +6,7 @@
     "EmergenceFloodingControlOn": true, 
     "NumberOfLayers": 20, 
     "UseNMinMineralFertilisingMethod": false, 
-    "EmergenceMoistureControlOn": true, 
+    "EmergenceMoistureControlOn": true,
     "debug?": false, 
     "crop.json": "./monica_simulation_setup/evaluation/crop-64.json", 
     "WaterDeficitResponseOn": true, 

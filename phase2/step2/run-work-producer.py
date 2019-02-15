@@ -49,7 +49,7 @@ def run_producer():
     # simulation options
     activate_debug = False
 
-    output_dir = "runs/2018-11-20/"
+    output_dir = "runs/2019-02-15/"
 
     # calibration -------------------------------------
 
