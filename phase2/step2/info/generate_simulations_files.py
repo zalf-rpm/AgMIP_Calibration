@@ -20,7 +20,7 @@ import json
 import datetime
 import pandas as pd
 
-activate_debug = True
+activate_debug = False
 
 #############################################################
 #############################################################
@@ -144,8 +144,8 @@ def create_sim_parameters(mgt_row, include_path, sim_id, calibration_mode):
     sim_parameters["UseSecondaryYields"] = True
     sim_parameters["NitrogenResponseOn"] = True
     sim_parameters["WaterDeficitResponseOn"] = True
-    sim_parameters["EmergenceMoistureControlOn"] = False
-    sim_parameters["EmergenceFloodingControlOn"] = False
+    sim_parameters["EmergenceMoistureControlOn"] = True
+    sim_parameters["EmergenceFloodingControlOn"] = True
     sim_parameters["UseAutomaticIrrigation"] = False
     sim_parameters["UseNMinMineralFertilisingMethod"] = False
 

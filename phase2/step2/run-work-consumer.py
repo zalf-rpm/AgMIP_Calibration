@@ -221,20 +221,21 @@ def create_output_rows(sim_id, result_map, custom_id):
     row.append(emerge_date.strftime("%d/%m/%Y"))
 
     # date bbch30
-    zadok30 = datetime.datetime.strptime(result_map["BBCH30"], '%Y-%m-%d')
+    zadok30 = datetime.datetime.strptime(result_map["ZADOK30"], '%Y-%m-%d')
     row.append(zadok30.strftime("%d/%m/%Y"))
 
-    begin_stage4 = datetime.datetime.strptime(result_map["BeginStage4"], '%Y-%m-%d')    # Flowering to grain filling
-    begin_stage5 = datetime.datetime.strptime(result_map["BeginStage5"], '%Y-%m-%d')    # Grain filling
+    #begin_stage4 = datetime.datetime.strptime(result_map["BeginStage4"], '%Y-%m-%d')    # Flowering to grain filling
+    #begin_stage5 = datetime.datetime.strptime(result_map["BeginStage5"], '%Y-%m-%d')    # Grain filling
 
-    zadok65 = begin_stage4 + ((begin_stage5 - begin_stage4) / 2)
+    zadok65 = datetime.datetime.strptime(result_map["ZADOK65"], '%Y-%m-%d')
     row.append(zadok65.strftime("%d/%m/%Y"))
 
-    if "BeginStage6" in result_map:
-        zadok90 = datetime.datetime.strptime(result_map["BeginStage6"], '%Y-%m-%d')    # Grain filling
-        row.append(zadok90.strftime("%d/%m/%Y"))
+    if "ZADOK90" in result_map:
+        zadok90 = datetime.datetime.strptime(result_map["ZADOK90"], '%Y-%m-%d').strftime("%d/%m/%Y")
     else:
-        row.append("NA")
+        zadok90 = "NA"
+
+    row.append(zadok90)
 
     return row
 

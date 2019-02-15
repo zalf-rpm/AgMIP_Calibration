@@ -81,7 +81,7 @@ def generate_monica_climate_csv_files():
                         precip = round(float(data_row[col['rain']]), 3)
                         pan = round(float(data_row[col['pan']]), 3)
                         et0 = pan * 0.7
-                        wind=0.0
+                        wind= 0.0
 
                         csv_out.writerow([date, tmin, tmax, tavg, globrad, precip, et0, wind])
 

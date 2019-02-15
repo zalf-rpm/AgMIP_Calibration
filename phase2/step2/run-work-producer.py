@@ -49,7 +49,7 @@ def run_producer():
     # simulation options
     activate_debug = False
 
-    output_dir = "runs/2018-10-01/"
+    output_dir = "runs/2018-11-20/"
 
     # calibration -------------------------------------
 
@@ -113,9 +113,15 @@ def run_producer():
         sim_parameters["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
 
         # spring wheat parameters for stage temperature sum
-        stage2_sum = 284
-        stage3_sum = 280
-        tsum_bbch30 = (stage3_sum) * 0.25 + stage2_sum
+        stage1_sum = 142.74
+        stage2_sum = 218.43
+        stage3_sum = 302.21
+        stage4_sum = 67.51
+        stage5_sum = 273.15
+
+
+        tsum_zadok30 =  stage2_sum + (stage3_sum * 0.25)
+        tsum_zadok65 = stage2_sum + stage3_sum + (stage4_sum * 0.25)
 
         output_map = {
 
@@ -141,9 +147,15 @@ def run_producer():
                 ["while", "Stage", "=", 6], [
                     ["Date|BeginStage6", "FIRST"]
                 ],
-                ["while", "TempSum", ">=", tsum_bbch30], [
-                    ["Date|BBCH30", "FIRST"]
+                ["while", "TempSum", ">=", tsum_zadok30], [
+                    ["Date|ZADOK30", "FIRST"]
                 ],
+                ["while", "TempSum", ">=", tsum_zadok65], [
+                    ["Date|ZADOK65", "FIRST"]
+                ],
+                ["while", "Stage", "=", 6], [
+                    ["Date|ZADOK90", "FIRST"]
+                ]
             ]
         }
 
@@ -166,6 +178,23 @@ def run_producer():
         env["csvViaHeaderOptions"]["start-date"] = sim_parameters["climate.csv-options"]["start-date"]
         env["csvViaHeaderOptions"]["end-date"] = sim_parameters["climate.csv-options"]["end-date"]
         env["pathToClimateCSV"] = sim_parameters["climate.csv"]
+
+        # overwrite stage temperature sum values with tommaso's calibrated ones
+        # stage 1
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]\
+            ["StageTemperatureSum"][0][0] = stage1_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"]\
+            ["StageTemperatureSum"][0][1] = stage2_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"] \
+            ["StageTemperatureSum"][0][2] = stage3_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"] \
+            ["StageTemperatureSum"][0][3] = stage4_sum
+
+        env["cropRotation"][0]["worksteps"][0]["crop"]["cropParams"]["cultivar"] \
+            ["StageTemperatureSum"][0][4] = stage5_sum
 
 
         # final env object with all necessary information
